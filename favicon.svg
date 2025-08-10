@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <defs>
+    <style>
+      path {
+        fill: #64ffda; /* Standard-Farbe (Cyan) */
+      }
+      @media (prefers-color-scheme: light) {
+        path {
+          fill: #007bff; /* Farbe für Light-Mode (Blau) */
+        }
+      }
+    </style>
+  </defs>
+  <path d="M12 2L4 5V11C4 16.5 7.6 21.7 12 23C16.4 21.7 20 16.5 20 11V5L12 2ZM12 12H18C17.5 16.5 14.9 20.3 12 21.8V12H6V6.3L12 3.2V12Z"/>
+</svg>
