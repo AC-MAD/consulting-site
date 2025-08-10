@@ -1,0 +1,1285 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chouifi Consulting | Cybersecurity & Risk Advisory</title>
+    <meta name="description" content="Chouifi Consulting bietet High-End Cybersecurity-Beratung, Penetrationstests und Security Architecture für anspruchsvolle Unternehmen. Schützen Sie Ihre digitalen Assets mit uns.">
+    <meta name="author" content="Chouifi Consulting">
+    <meta name="keywords" content="cybersecurity, consulting, penetration testing, red teaming, cloud security, incident response, security architecture, GDPR, ISO 27001">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://chouifi.com/">
+    <meta property="og:title" content="Chouifi Consulting | Cybersecurity & Risk Advisory">
+    <meta property="og:description" content="High-End Cybersecurity-Beratung, Penetrationstests und Security Architecture.">
+    <meta property="og:image" content="https://chouifi.example.com/og-image.jpg"> <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://chouifi.example.com/">
+    <meta property="twitter:title" content="Chouifi Consulting | Cybersecurity & Risk Advisory">
+    <meta property="twitter:description" content="High-End Cybersecurity-Beratung, Penetrationstests und Security Architecture.">
+    <meta property="twitter:image" content="https://chouifi.example.com/og-image.jpg"> <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><path fill=%22%2300aaff%22 d=%22M50 5L95 27.5V72.5L50 95L5 72.5V27.5L50 5ZM15 32.5V67.5L50 85V50L15 32.5ZM85 32.5L50 50V85L85 67.5V32.5ZM50 15L25 27.5L50 40L75 27.5L50 15Z%22/></svg>">
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Chouifi Consulting",
+      "url": "https://chouifi.example.com/",
+      "logo": "https://chouifi.example.com/logo.svg",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+49-XXX-XXXXXXX",
+        "contactType": "customer service",
+        "email": "contact@chouifi.example.com"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/company/REPLACE_ME"
+      ]
+    }
+    </script>
+
+    <style>
+        :root {
+            --color-primary: #00aaff;
+            --color-primary-dark: #0088cc;
+            --color-secondary: #00ffaa;
+            --color-background: #0a0f1a;
+            --color-surface: #101828;
+            --color-surface-light: #1d2939;
+            --color-text: #eaedf3;
+            --color-text-muted: #98a2b3;
+            --color-border: #344054;
+            --color-success: #12b76a;
+            --color-error: #f04438;
+            --color-shadow: rgba(0, 0, 0, 0.2);
+            --font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            --font-family-mono: 'Fira Code', 'Courier New', monospace;
+            --container-width: 1140px;
+            --border-radius: 8px;
+            --transition-speed: 0.3s;
+        }
+
+        .light-mode {
+            --color-background: #f9fafb;
+            --color-surface: #ffffff;
+            --color-surface-light: #f2f4f7;
+            --color-text: #101828;
+            --color-text-muted: #475467;
+            --color-border: #d0d5dd;
+            --color-shadow: rgba(0, 0, 0, 0.05);
+        }
+        
+        *, *::before, *::after { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            margin: 0;
+            font-family: var(--font-family-base);
+            background-color: var(--color-background);
+            color: var(--color-text);
+            font-size: 16px;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            transition: background-color var(--transition-speed), color var(--transition-speed);
+        }
+        main { display: block; }
+        h1, h2, h3, h4, h5, h6 { margin: 0; line-height: 1.2; font-weight: 600; }
+        h1 { font-size: clamp(2.5rem, 5vw, 4rem); }
+        h2 { font-size: clamp(2rem, 4vw, 3rem); }
+        h3 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
+        p { margin: 0 0 1em; }
+        a { color: var(--color-primary); text-decoration: none; transition: color var(--transition-speed); }
+        a:hover { color: var(--color-primary-dark); text-decoration: underline; }
+        img, svg { max-width: 100%; height: auto; display: block; }
+
+        .container {
+            width: 100%;
+            max-width: var(--container-width);
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0 1.5rem;
+        }
+        .section { padding: 4rem 0; }
+        @media (min-width: 768px) { .section { padding: 6rem 0; } }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        .section-header h2 {
+            margin-bottom: 0.5rem;
+        }
+        .section-header p {
+            font-size: 1.125rem;
+            color: var(--color-text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .highlight { color: var(--color-primary); }
+
+        .btn {
+            display: inline-block;
+            font-weight: 600;
+            text-align: center;
+            vertical-align: middle;
+            cursor: pointer;
+            user-select: none;
+            border: 1px solid transparent;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            border-radius: var(--border-radius);
+            transition: all var(--transition-speed) ease;
+        }
+        .btn-primary {
+            background-color: var(--color-primary);
+            color: #fff;
+            border-color: var(--color-primary);
+        }
+        .btn-primary:hover {
+            background-color: var(--color-primary-dark);
+            border-color: var(--color-primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 170, 255, 0.2);
+        }
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--color-primary);
+            border-color: var(--color-primary);
+        }
+        .btn-secondary:hover {
+            background-color: var(--color-primary);
+            color: #fff;
+        }
+        
+        /* Skip Link */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--color-primary);
+            color: white;
+            padding: 8px;
+            z-index: 10000;
+            transition: top 0.3s;
+        }
+        .skip-link:focus { top: 0; }
+        
+        /* Header */
+        .site-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1rem 0;
+            background-color: rgba(10, 15, 26, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--color-border);
+            transition: background-color var(--transition-speed);
+        }
+        .light-mode .site-header {
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-text);
+        }
+        .logo svg {
+            width: 32px;
+            height: 32px;
+        }
+        .logo path { fill: var(--color-primary); }
+
+        .nav-links {
+            display: none;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: 2rem;
+        }
+        @media(min-width: 992px) { .nav-links { display: flex; } }
+        .nav-links a { font-weight: 500; color: var(--color-text-muted); }
+        .nav-links a:hover, .nav-links a.active { color: var(--color-text); }
+        .header-actions { display: flex; align-items: center; gap: 1rem; }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-text-muted);
+        }
+        .theme-toggle:hover { color: var(--color-text); background-color: var(--color-surface); }
+        .theme-toggle svg { width: 20px; height: 20px; }
+        .theme-toggle .icon-sun { display: none; }
+        .light-mode .theme-toggle .icon-sun { display: block; }
+        .light-mode .theme-toggle .icon-moon { display: none; }
+
+        .menu-toggle {
+            display: block;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            color: var(--color-text);
+            z-index: 1002;
+        }
+        .menu-toggle svg { width: 24px; height: 24px; }
+        @media(min-width: 992px) { .menu-toggle { display: none; } }
+        
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: var(--color-background);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transform: translateX(100%);
+            transition: transform var(--transition-speed) ease-in-out;
+            z-index: 1001;
+        }
+        .mobile-nav.is-open { transform: translateX(0); }
+        .mobile-nav .nav-links {
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            font-size: 1.5rem;
+        }
+        .mobile-nav .nav-links li { margin-bottom: 2rem; }
+
+        /* Hero Section */
+        #hero {
+            position: relative;
+            display: flex;
+            align-items: center;
+            min-height: 100vh;
+            padding-top: 80px; /* Header height */
+            text-align: center;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        .hero-content h1 {
+            color: var(--color-text);
+            margin-bottom: 1rem;
+        }
+        .hero-content .subtitle {
+            font-size: 1.25rem;
+            color: var(--color-text-muted);
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+        .hero-graph-container {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            overflow: hidden;
+            z-index: 1;
+            opacity: 0.3;
+        }
+        .light-mode .hero-graph-container { opacity: 0.2; }
+        #hero-graph {
+            width: 100%; height: 100%;
+        }
+
+        /* Services Section */
+        .services-grid {
+            display: grid;
+            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        }
+        .service-card {
+            background-color: var(--color-surface);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            border: 1px solid var(--color-border);
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+        }
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px var(--color-shadow);
+        }
+        .service-card .icon {
+            margin-bottom: 1.5rem;
+            background-color: var(--color-surface-light);
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .service-card .icon svg {
+            width: 24px;
+            height: 24px;
+            color: var(--color-primary);
+        }
+        .service-card h3 {
+            margin-bottom: 0.5rem;
+        }
+        .service-card p {
+            color: var(--color-text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 0;
+        }
+        
+        /* Case Studies */
+        .case-studies-grid {
+            display: grid;
+            gap: 2rem;
+        }
+        @media(min-width: 992px) { .case-studies-grid { grid-template-columns: 1fr 1fr; gap: 3rem; } }
+        .case-study {
+            background-color: var(--color-surface);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            border: 1px solid var(--color-border);
+        }
+        .case-study-content {
+            padding: 2rem;
+        }
+        .case-study-tag {
+            display: inline-block;
+            background-color: var(--color-primary);
+            color: #fff;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+        .case-study h3 { margin-bottom: 1rem; }
+        .case-study p { color: var(--color-text-muted); margin-bottom: 1.5rem; }
+        .case-study-kpis {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            border-top: 1px solid var(--color-border);
+            padding-top: 1.5rem;
+        }
+        .kpi {
+            text-align: left;
+        }
+        .kpi .value { font-size: 1.75rem; font-weight: 700; color: var(--color-secondary); }
+        .kpi .label { font-size: 0.9rem; color: var(--color-text-muted); }
+
+        /* Team Section */
+        .team-grid {
+            display: grid;
+            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+        .team-card {
+            text-align: center;
+            background-color: var(--color-surface);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            border: 1px solid var(--color-border);
+        }
+        .team-card-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            background-color: var(--color-surface-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .team-card-avatar svg {
+            width: 80%;
+            height: 80%;
+            color: var(--color-text-muted);
+        }
+        .team-card h3 {
+            margin-bottom: 0.25rem;
+        }
+        .team-card .role {
+            color: var(--color-primary);
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+        .team-card .social-link svg {
+            width: 24px; height: 24px;
+            color: var(--color-text-muted);
+            transition: color var(--transition-speed);
+        }
+        .team-card .social-link:hover svg { color: var(--color-primary); }
+
+        /* Testimonials */
+        .testimonial-grid {
+            display: grid;
+            gap: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        @media(min-width: 768px) { .testimonial-grid { grid-template-columns: 1fr 1fr; } }
+        .testimonial {
+            background-color: var(--color-surface);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            border-left: 4px solid var(--color-primary);
+        }
+        .testimonial blockquote {
+            margin: 0;
+            font-size: 1.125rem;
+            font-style: italic;
+        }
+        .testimonial footer {
+            margin-top: 1rem;
+            font-style: normal;
+            font-weight: 600;
+        }
+        .testimonial footer span {
+            font-weight: 400;
+            color: var(--color-text-muted);
+            display: block;
+            font-size: 0.9rem;
+        }
+
+        /* Sticky CTA */
+        .sticky-cta {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 998;
+        }
+        .sticky-cta .btn {
+            box-shadow: 0 5px 20px var(--color-shadow);
+        }
+        
+        /* Modal */
+        .modal {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1003;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0s var(--transition-speed), opacity var(--transition-speed);
+        }
+        .modal.is-visible {
+            visibility: visible;
+            opacity: 1;
+            transition-delay: 0s;
+        }
+        .modal-overlay {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(10, 15, 26, 0.8);
+            cursor: pointer;
+        }
+        .modal-content {
+            position: relative;
+            background-color: var(--color-surface);
+            border-radius: var(--border-radius);
+            width: 90%;
+            max-width: 700px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 2rem;
+            transform: scale(0.9);
+            transition: transform var(--transition-speed);
+        }
+        .modal.is-visible .modal-content {
+            transform: scale(1);
+        }
+        @media(min-width: 768px) { .modal-content { padding: 3rem; } }
+        
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            color: var(--color-text-muted);
+        }
+        .modal-close:hover { color: var(--color-text); }
+        .modal-close svg { width: 24px; height: 24px; }
+        .modal-header { margin-bottom: 2rem; }
+        .modal-header h2 { font-size: 2rem; }
+        .modal-header p { color: var(--color-text-muted); }
+        
+        /* Form */
+        .contact-form {
+            display: grid;
+            gap: 1.5rem;
+        }
+        @media(min-width: 768px) {
+            .form-grid-2 {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 1.5rem;
+            }
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        .form-group label {
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        .form-group label .optional {
+            color: var(--color-text-muted);
+            font-weight: 400;
+        }
+        .form-control {
+            background-color: var(--color-background);
+            border: 1px solid var(--color-border);
+            border-radius: var(--border-radius);
+            padding: 0.75rem 1rem;
+            color: var(--color-text);
+            font-family: var(--font-family-base);
+            font-size: 1rem;
+            transition: border-color var(--transition-speed), box-shadow var(--transition-speed);
+        }
+        .form-control:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px rgba(0, 170, 255, 0.2);
+        }
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+        }
+        textarea.form-control.pgp-key {
+            font-family: var(--font-family-mono);
+            font-size: 0.85rem;
+            min-height: 150px;
+        }
+        .form-group-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .form-group-checkbox label { margin: 0; font-size: 0.875rem; color: var(--color-text-muted); }
+        .form-group-checkbox input[type="checkbox"] {
+            width: 1.25em;
+            height: 1.25em;
+            accent-color: var(--color-primary);
+        }
+        .honeypot { position: absolute; left: -5000px; }
+        .form-footer {
+            margin-top: 1rem;
+        }
+        .form-footer p { font-size: 0.8rem; color: var(--color-text-muted); }
+        .form-message {
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            margin-top: 1rem;
+            display: none;
+        }
+        .form-message.success { background-color: var(--color-success); color: #fff; }
+        .form-message.error { background-color: var(--color-error); color: #fff; }
+
+        /* Footer */
+        .site-footer {
+            background-color: var(--color-surface);
+            padding: 3rem 0;
+            border-top: 1px solid var(--color-border);
+        }
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        @media(min-width: 768px) {
+            .footer-content {
+                flex-direction: row;
+                justify-content: space-between;
+                text-align: left;
+            }
+        }
+        .footer-logo { margin-bottom: 1.5rem; }
+        @media(min-width: 768px) { .footer-logo { margin-bottom: 0; } }
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        @media(min-width: 768px) { .footer-links { margin-top: 0; } }
+        .footer-links a { color: var(--color-text-muted); }
+        .copyright { color: var(--color-text-muted); font-size: 0.9rem; }
+
+        /* Cookie Banner */
+        .cookie-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--color-surface);
+            border-top: 1px solid var(--color-border);
+            padding: 1rem;
+            z-index: 1004;
+            display: none; /* Initially hidden */
+            box-shadow: 0 -5px 15px var(--color-shadow);
+        }
+        .cookie-banner.is-visible { display: block; }
+        .cookie-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            max-width: var(--container-width);
+            margin: 0 auto;
+        }
+        @media(min-width: 768px) {
+            .cookie-content { flex-direction: row; justify-content: space-between; }
+        }
+        .cookie-text {
+            font-size: 0.9rem;
+            color: var(--color-text-muted);
+            margin: 0;
+        }
+        .cookie-buttons { display: flex; gap: 1rem; }
+        
+        /* Animations */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in-up.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Accessibility */
+        .visually-hidden {
+            clip: rect(0 0 0 0);
+            clip-path: inset(50%);
+            height: 1px;
+            overflow: hidden;
+            position: absolute;
+            white-space: nowrap;
+            width: 1px;
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Zum Hauptinhalt springen</a>
+
+    <header class="site-header">
+        <div class="container header-container">
+            <a href="/" class="logo" aria-label="Chouifi Consulting Startseite">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M50 5L95 27.5V72.5L50 95L5 72.5V27.5L50 5ZM15 32.5V67.5L50 85V50L15 32.5ZM85 32.5L50 50V85L85 67.5V32.5ZM50 15L25 27.5L50 40L75 27.5L50 15Z"/></svg>
+                <span>Chouifi Consulting</span>
+            </a>
+            <nav class="main-nav" aria-label="Hauptnavigation">
+                <ul class="nav-links">
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#cases">Case Studies</a></li>
+                    <li><a href="#team">Team</a></li>
+                    <li><a href="#contact-modal" class="js-open-modal">Kontakt</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark/light mode">
+                    <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.106a.75.75 0 010 1.06l-1.591 1.59a.75.75 0 11-1.06-1.06l1.59-1.591a.75.75 0 011.06 0zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.894 17.894a.75.75 0 01-1.06 0l-1.59-1.591a.75.75 0 111.06-1.06l1.591 1.59a.75.75 0 010 1.06zM12 21a.75.75 0 01-.75-.75v-2.25a.75.75 0 011.5 0V21a.75.75 0 01-.75.75zM5.106 17.894a.75.75 0 010-1.06l1.591-1.59a.75.75 0 111.06 1.06l-1.59 1.591a.75.75 0 01-1.06 0zM3 12a.75.75 0 01.75-.75h2.25a.75.75 0 010 1.5H3.75A.75.75 0 013 12zM6.106 6.106a.75.75 0 011.06 0l1.591 1.59a.75.75 0 01-1.06 1.06L6.106 7.167a.75.75 0 010-1.06z"></path></svg>
+                    <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 004.463-.949a.75.75 0 01.981.632l.004.005a.75.75 0 01-.633.981A10.5 10.5 0 0112 22.5a10.5 10.5 0 01-10.5-10.5 10.5 10.5 0 014.718-8.472a.75.75 0 01.81.162z" clip-rule="evenodd"></path></svg>
+                </button>
+                <button class="menu-toggle" id="menu-toggle" aria-controls="mobile-nav" aria-expanded="false">
+                    <span class="visually-hidden">Menü öffnen/schließen</span>
+                    <svg class="icon-menu" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path></svg>
+                    <svg class="icon-close" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="display: none;" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="mobile-nav" id="mobile-nav" aria-hidden="true">
+        <ul class="nav-links">
+            <li><a href="#services">Services</a></li>
+            <li><a href="#cases">Case Studies</a></li>
+            <li><a href="#team">Team</a></li>
+            <li><a href="#contact-modal" class="js-open-modal">Kontakt</a></li>
+        </ul>
+    </div>
+
+    <main id="main-content">
+
+        <section id="hero">
+            <div class="hero-graph-container" aria-hidden="true">
+                <svg id="hero-graph"></svg>
+            </div>
+            <div class="container hero-content">
+                <h1 class="fade-in-up">Engineering <span class="highlight">Digital Resilience</span></h1>
+                <p class="subtitle fade-in-up" style="transition-delay: 0.1s;">Wir sind Ihr strategischer Partner für Cybersecurity. Von der Prävention über die Detektion bis zur Reaktion – wir sichern Ihre kritische Infrastruktur und schaffen nachhaltiges Vertrauen.</p>
+                <div class="fade-in-up" style="transition-delay: 0.2s;">
+                    <a href="#contact-modal" class="btn btn-primary js-open-modal">Sicherheitsaudit anfragen</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="fade-in-up">Unsere Expertise für Ihre Sicherheit</h2>
+                    <p class="fade-in-up" style="transition-delay: 0.1s;">Wir bieten ein umfassendes Portfolio an Beratungs- und Testdienstleistungen, um Ihre Organisation vor den fortschrittlichsten Bedrohungen zu schützen.</p>
+                </div>
+                <div class="services-grid">
+                    <article class="service-card fade-in-up" style="transition-delay: 0.2s;">
+                        <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.042 21.672L13.684 16.6m0 0l-2.51 2.225.569-9.47 5.227 7.917-3.286-.672zm-7.518-.267A8.25 8.25 0 1120.25 10.5M8.288 14.212A5.25 5.25 0 1117.25 10.5" /></svg></div>
+                        <h3>Red & Purple Teaming</h3>
+                        <p>Simulieren Sie realistische Angriffe auf Ihre Infrastruktur und verbessern Sie Ihre Verteidigungsmechanismen durch kollaborative Übungen.</p>
+                    </article>
+                    <article class="service-card fade-in-up" style="transition-delay: 0.3s;">
+                        <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.286zm0 13.036h.008v.008h-.008v-.008z" /></svg></div>
+                        <h3>Penetration Testing</h3>
+                        <p>Identifizieren Sie Schwachstellen in Webanwendungen, Netzwerken und mobilen Apps, bevor Angreifer es tun. Inklusive detaillierter Berichte.</p>
+                    </article>
+                    <article class="service-card fade-in-up" style="transition-delay: 0.4s;">
+                        <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15a4.5 4.5 0 004.5 4.5H18a4.5 4.5 0 004.5-4.5V8.25a4.5 4.5 0 00-4.5-4.5H6.75a4.5 4.5 0 00-4.5 4.5v6.75z" /></svg></div>
+                        <h3>Security Architecture</h3>
+                        <p>Entwerfen und implementieren Sie sichere System- und Netzwerkarchitekturen, die auf "Security by Design"-Prinzipien basieren.</p>
+                    </article>
+                    <article class="service-card fade-in-up" style="transition-delay: 0.5s;">
+                        <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 17.25v-.228a4.5 4.5 0 00-.12-1.03l-2.268-9.64a3.375 3.375 0 00-3.285-2.65H8.25a3.375 3.375 0 00-3.285 2.65l-2.268 9.64a4.5 4.5 0 00-.12 1.03v.228m19.5 0a3 3 0 01-3 3H5.25a3 3 0 01-3-3m19.5 0a3 3 0 00-3-3H5.25a3 3 0 00-3 3m16.5 0h.008v.008h-.008v-.008z" /></svg></div>
+                        <h3>Cloud Security (CSPM)</h3>
+                        <p>Stärken Sie Ihre Cloud-Umgebungen (AWS, Azure, GCP) durch kontinuierliche Überwachung und Härtung gegen Fehlkonfigurationen.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="cases" class="section" style="background-color: var(--color-surface-light);">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="fade-in-up">Proof of Competence</h2>
+                    <p class="fade-in-up" style="transition-delay: 0.1s;">Unsere Erfolgsbilanz zeigt, wie wir komplexe Herausforderungen meistern und messbare Ergebnisse für unsere Klienten liefern.</p>
+                </div>
+                <div class="case-studies-grid">
+                    <article class="case-study fade-in-up" style="transition-delay: 0.2s;">
+                        <div class="case-study-content">
+                            <span class="case-study-tag">FinTech</span>
+                            <h3>Absicherung einer Payment-Gateway-Infrastruktur</h3>
+                            <p>Umfassendes Red-Team-Engagement zur Überprüfung der Resilienz eines hochkritischen Zahlungsdienstleisters gegen gezielte Angriffe, inklusive Social Engineering und physischen Tests.</p>
+                            <div class="case-study-kpis">
+                                <div class="kpi">
+                                    <div class="value">+75%</div>
+                                    <div class="label">Detection Rate Improvement</div>
+                                </div>
+                                <div class="kpi">
+                                    <div class="value">48h</div>
+                                    <div class="label">Mean Time to Detect</div>
+                                </div>
+                            </div>
+                            <a href="#REPLACE_ME_PDF_LINK_1" class="btn btn-secondary">Download Case Study (PDF)</a>
+                        </div>
+                    </article>
+                    <article class="case-study fade-in-up" style="transition-delay: 0.3s;">
+                        <div class="case-study-content">
+                            <span class="case-study-tag">SaaS / KRITIS</span>
+                            <h3>Incident Response & Recovery nach Ransomware</h3>
+                            <p>Sofortige Reaktion auf einen Ransomware-Angriff, Eindämmung der Bedrohung, Wiederherstellung kritischer Systeme und Implementierung robusterer Schutzmaßnahmen zur Verhinderung zukünftiger Vorfälle.</p>
+                            <div class="case-study-kpis">
+                                <div class="kpi">
+                                    <div class="value">-90%</div>
+                                    <div class="label">System Downtime</div>
+                                </div>
+                                <div class="kpi">
+                                    <div class="value">100%</div>
+                                    <div class="label">Data Recovery</div>
+                                </div>
+                            </div>
+                            <a href="#REPLACE_ME_PDF_LINK_2" class="btn btn-secondary">Download Case Study (PDF)</a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="team" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="fade-in-up">Unser Kernteam</h2>
+                    <p class="fade-in-up" style="transition-delay: 0.1s;">Geleitet von zertifizierten Experten mit jahrelanger Erfahrung in der Offensive Security und der strategischen Verteidigung digitaler Werte.</p>
+                </div>
+                <div class="team-grid">
+                    <article class="team-card fade-in-up" style="transition-delay: 0.2s;">
+                        <div class="team-card-avatar">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M18.685 19.097A9.723 9.723 0 0021.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 003.065 7.097A9.716 9.716 0 0012 21.75a9.716 9.716 0 006.685-2.653zm-12.54-1.285A7.486 7.486 0 0112 15a7.486 7.486 0 015.855 2.812A8.224 8.224 0 0112 20.25a8.224 8.224 0 01-5.855-2.438zM15.75 9a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" clip-rule="evenodd" /></svg>
+                        </div>
+                        <h3>Karim Chouifi</h3>
+                        <p class="role">Gründer & Principal Consultant</p>
+                        <a href="#REPLACE_ME_LINKEDIN_1" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Karim Chouifi on LinkedIn">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.25 6.5 1.75 1.75 0 016.5 8.25zM19 19h-3v-4.75c0-1.4-.5-2.25-1.75-2.25S12.75 13 12.75 14.25V19h-3v-9h2.9v1.3h.05c.4-.75 1.35-1.55 3.05-1.55 3.25 0 3.75 2.15 3.75 5V19z" /></svg>
+                        </a>
+                    </article>
+                    <article class="team-card fade-in-up" style="transition-delay: 0.3s;">
+                        <div class="team-card-avatar">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M18.685 19.097A9.723 9.723 0 0021.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 003.065 7.097A9.716 9.716 0 0012 21.75a9.716 9.716 0 006.685-2.653zm-12.54-1.285A7.486 7.486 0 0112 15a7.486 7.486 0 015.855 2.812A8.224 8.224 0 0112 20.25a8.224 8.224 0 01-5.855-2.438zM15.75 9a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" clip-rule="evenodd" /></svg>
+                        </div>
+                        <h3>Dr. Anja Weber</h3>
+                        <p class="role">Head of Incident Response</p>
+                        <a href="#REPLACE_ME_LINKEDIN_2" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Dr. Anja Weber on LinkedIn">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.25 6.5 1.75 1.75 0 016.5 8.25zM19 19h-3v-4.75c0-1.4-.5-2.25-1.75-2.25S12.75 13 12.75 14.25V19h-3v-9h2.9v1.3h.05c.4-.75 1.35-1.55 3.05-1.55 3.25 0 3.75 2.15 3.75 5V19z" /></svg>
+                        </a>
+                    </article>
+                    <article class="team-card fade-in-up" style="transition-delay: 0.4s;">
+                        <div class="team-card-avatar">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M18.685 19.097A9.723 9.723 0 0021.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 003.065 7.097A9.716 9.716 0 0012 21.75a9.716 9.716 0 006.685-2.653zm-12.54-1.285A7.486 7.486 0 0112 15a7.486 7.486 0 015.855 2.812A8.224 8.224 0 0112 20.25a8.224 8.224 0 01-5.855-2.438zM15.75 9a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" clip-rule="evenodd" /></svg>
+                        </div>
+                        <h3>Ben Schmidt</h3>
+                        <p class="role">Lead Offensive Security</p>
+                        <a href="#REPLACE_ME_LINKEDIN_3" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Ben Schmidt on LinkedIn">
+                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.25 6.5 1.75 1.75 0 016.5 8.25zM19 19h-3v-4.75c0-1.4-.5-2.25-1.75-2.25S12.75 13 12.75 14.25V19h-3v-9h2.9v1.3h.05c.4-.75 1.35-1.55 3.05-1.55 3.25 0 3.75 2.15 3.75 5V19z" /></svg>
+                        </a>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="testimonials" class="section" style="background-color: var(--color-surface-light);">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="fade-in-up">Was unsere Klienten sagen</h2>
+                </div>
+                <div class="testimonial-grid">
+                    <article class="testimonial fade-in-up" style="transition-delay: 0.2s;">
+                        <blockquote>
+                            <p>"Die Zusammenarbeit mit Chouifi Consulting war ein Wendepunkt für unsere Sicherheitsstrategie. Ihre technische Tiefe und ihr pragmatischer Ansatz haben uns geholfen, unsere Abwehrmaßnahmen auf ein neues Niveau zu heben."</p>
+                        </blockquote>
+                        <footer>
+                            CISO, DAX 40 Unternehmen
+                            <span>Energie-Sektor</span>
+                        </footer>
+                    </article>
+                    <article class="testimonial fade-in-up" style="transition-delay: 0.3s;">
+                        <blockquote>
+                            <p>"Das Red-Team-Engagement war ein echter Augenöffner. Die Professionalität und der Realismus der Simulation waren beeindruckend und haben uns unschätzbare Einblicke in unsere Schwachstellen gegeben."</p>
+                        </blockquote>
+                        <footer>
+                            Head of IT-Security, führende Neobank
+                            <span>Finanz-Sektor</span>
+                        </footer>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <div class="sticky-cta">
+        <a href="#contact-modal" class="btn btn-primary js-open-modal">Audit anfragen</a>
+    </div>
+
+    <div id="contact-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-description" hidden>
+        <div class="modal-overlay js-close-modal" tabindex="-1"></div>
+        <div class="modal-content" role="document">
+            <button class="modal-close js-close-modal" aria-label="Dialog schließen">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+            </button>
+            <div class="modal-header">
+                <h2 id="modal-title">Starten Sie Ihr Projekt mit uns</h2>
+                <p id="modal-description">Füllen Sie das Formular aus, um ein vertrauliches Gespräch zu vereinbaren. Wir melden uns umgehend bei Ihnen. E-Mail: contact@chouifi.example.com </p>
+            </div>
+            
+            <form id="contact-form" class="contact-form" action="https://formsubmit.co/support@chouifi.com" method="POST" novalidate>
+    <!-- Hidden fields for Formsubmit -->
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_template" value="box">
+    <input type="hidden" name="_next" value="https://yourdomain.de/danke.html">
+
+    <div class="form-grid-2">
+        <div class="form-group">
+            <label for="name">Ihr Name</label>
+            <input type="text" id="name" name="name" class="form-control" required autocomplete="name">
+        </div>
+        <div class="form-group">
+            <label for="company">Firma / Organisation</label>
+            <input type="text" id="company" name="company" class="form-control" required autocomplete="organization">
+        </div>
+    </div>
+
+    <div class="form-grid-2">
+        <div class="form-group">
+            <label for="email">E-Mail</label>
+            <input type="email" id="email" name="email" class="form-control" required autocomplete="email">
+        </div>
+        <div class="form-group">
+            <label for="phone">Telefon <span class="optional">(Optional)</span></label>
+            <input type="tel" id="phone" name="phone" class="form-control" autocomplete="tel">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="description">Projektbeschreibung</label>
+        <textarea id="description" name="description" class="form-control" required placeholder="Worum geht es? Was möchten Sie erreichen?"></textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="budget">Geplantes Budget</label>
+        <select id="budget" name="budget" class="form-control" required>
+            <option value="">Bitte auswählen</option>
+            <option value="Unter 25.000 €">Unter 25.000 €</option>
+            <option value="25.000 € – 50.000 €">25.000 € – 50.000 €</option>
+            <option value="50.000 € – 100.000 €">50.000 € – 100.000 €</option>
+            <option value="Über 100.000 €">Über 100.000 €</option>
+            <option value="Unter NDA">Unter NDA</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="pgp-key">Ihr PGP Public Key <span class="optional">(Optional)</span></label>
+        <textarea id="pgp-key" name="pgp-key" class="form-control pgp-key" placeholder="-----BEGIN PGP PUBLIC KEY BLOCK-----..."></textarea>
+        <p style="font-size: 0.8rem; color: var(--color-text-muted); margin-top: 0.5rem;">Fügen Sie Ihren PGP-Schlüssel ein, wenn Sie eine verschlüsselte Antwort wünschen.</p>
+    </div>
+
+    <!-- Honeypot for spam bots -->
+    <div class="honeypot">
+        <label for="website">Website</label>
+        <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+    </div>
+
+    <div class="form-group-checkbox">
+        <input type="checkbox" id="consent" name="consent" required>
+        <label for="consent">Ich stimme zu, dass meine Daten zur Bearbeitung meiner Anfrage gespeichert und verarbeitet werden. Die <a href="#REPLACE_ME_PRIVACY_POLICY" target="_blank">Datenschutzerklärung</a> habe ich gelesen.</label>
+    </div>
+
+    <div class="form-footer">
+        <button type="submit" class="btn btn-primary" style="width: 100%;">Anfrage sicher senden</button>
+        <p>Ihre Daten werden vertraulich behandelt und nicht für Werbezwecke verwendet.</p>
+    </div>
+
+    <div id="form-message" class="form-message"></div>
+</form>
+
+        </div>
+    </div>
+    
+    <div class="cookie-banner" id="cookie-banner" role="dialog" aria-labelledby="cookie-title" aria-describedby="cookie-description">
+        <div class="cookie-content">
+            <div class="cookie-text">
+                <h3 id="cookie-title" class="visually-hidden">Cookie-Hinweis</h3>
+                <p id="cookie-description">Diese Website verwendet nur technisch notwendige Cookies, um grundlegende Funktionen wie den Dark-Mode-Wechsel zu speichern. Wir verwenden kein Tracking oder Analytics. Weitere Informationen finden Sie in unserer <a href="#REPLACE_ME_PRIVACY_POLICY">Datenschutzerklärung</a>.</p>
+            </div>
+            <div class="cookie-buttons">
+                <button class="btn btn-secondary" id="cookie-decline">Ablehnen</button>
+                <button class="btn btn-primary" id="cookie-accept">Akzeptieren</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="container footer-content">
+            <div class="footer-logo">
+                 <a href="/" class="logo" aria-label="Chouifi Consulting Startseite">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M50 5L95 27.5V72.5L50 95L5 72.5V27.5L50 5ZM15 32.5V67.5L50 85V50L15 32.5ZM85 32.5L50 50V85L85 67.5V32.5ZM50 15L25 27.5L50 40L75 27.5L50 15Z"/></svg>
+                    <span>Chouifi Consulting</span>
+                </a>
+                <p class="copyright">&copy; 2025 Chouifi Consulting. Alle Rechte vorbehalten.</p>
+            </div>
+            <ul class="footer-links">
+                <li><a href="#REPLACE_ME_IMPRINT">Impressum</a></li>
+                <li><a href="#REPLACE_ME_PRIVACY_POLICY">Datenschutz</a></li>
+                <li><a href="#REPLACE_ME_LINKEDIN_COMPANY" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script>
+    (function() {
+        'use strict';
+
+        // Helper functions
+        const qs = (selector, scope = document) => scope.querySelector(selector);
+        const qsa = (selector, scope = document) => scope.querySelectorAll(selector);
+        
+        // Run scripts after DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // --- Theme Toggler ---
+            const themeToggle = qs('#theme-toggle');
+            const body = document.body;
+            
+            const applyTheme = (theme) => {
+                if (theme === 'light') {
+                    body.classList.add('light-mode');
+                    themeToggle.setAttribute('aria-label', 'In den Dunkelmodus wechseln');
+                } else {
+                    body.classList.remove('light-mode');
+                    themeToggle.setAttribute('aria-label', 'In den Hellmodus wechseln');
+                }
+            };
+            
+            const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+            applyTheme(savedTheme);
+
+            themeToggle.addEventListener('click', () => {
+                const newTheme = body.classList.contains('light-mode') ? 'dark' : 'light';
+                localStorage.setItem('theme', newTheme);
+                applyTheme(newTheme);
+            });
+
+            // --- Mobile Navigation ---
+            const menuToggle = qs('#menu-toggle');
+            const mobileNav = qs('#mobile-nav');
+            const iconMenu = qs('.icon-menu', menuToggle);
+            const iconClose = qs('.icon-close', menuToggle);
+
+            const toggleNav = () => {
+                const isOpen = mobileNav.classList.toggle('is-open');
+                menuToggle.setAttribute('aria-expanded', isOpen);
+                document.body.style.overflow = isOpen ? 'hidden' : '';
+                iconMenu.style.display = isOpen ? 'none' : 'block';
+                iconClose.style.display = isOpen ? 'block' : 'none';
+                mobileNav.setAttribute('aria-hidden', !isOpen);
+            };
+
+            menuToggle.addEventListener('click', toggleNav);
+            qsa('.mobile-nav a', mobileNav).forEach(link => {
+                link.addEventListener('click', () => {
+                    if (mobileNav.classList.contains('is-open')) {
+                        toggleNav();
+                    }
+                });
+            });
+
+            // --- Modal Logic ---
+            const openModalBtns = qsa('.js-open-modal');
+            const closeModalBtns = qsa('.js-close-modal');
+            const modal = qs('#contact-modal');
+            let lastFocusedElement;
+
+            const openModal = () => {
+                lastFocusedElement = document.activeElement;
+                modal.hidden = false;
+                setTimeout(() => {
+                    modal.classList.add('is-visible');
+                    qs('.form-control', modal).focus();
+                }, 10);
+                document.addEventListener('keydown', handleModalKeydown);
+                document.body.style.overflow = 'hidden';
+            };
+
+            const closeModal = () => {
+                modal.classList.remove('is-visible');
+                document.removeEventListener('keydown', handleModalKeydown);
+                document.body.style.overflow = '';
+                setTimeout(() => {
+                    modal.hidden = true;
+                    if(lastFocusedElement) lastFocusedElement.focus();
+                }, 300); // match css transition
+            };
+            
+            const handleModalKeydown = (e) => {
+                if (e.key === 'Escape') closeModal();
+                if (e.key === 'Tab') {
+                    const focusableElements = qsa('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])', modal);
+                    const firstElement = focusableElements[0];
+                    const lastElement = focusableElements[focusableElements.length - 1];
+
+                    if (e.shiftKey) {
+                        if (document.activeElement === firstElement) {
+                            lastElement.focus();
+                            e.preventDefault();
+                        }
+                    } else {
+                        if (document.activeElement === lastElement) {
+                            firstElement.focus();
+                            e.preventDefault();
+                        }
+                    }
+                }
+            };
+            
+            openModalBtns.forEach(btn => btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                openModal();
+            }));
+            closeModalBtns.forEach(btn => btn.addEventListener('click', closeModal));
+
+            // --- Form Submission Simulation ---
+            const contactForm = qs('#contact-form');
+            const formMessage = qs('#form-message');
+
+            contactForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                if (qs('#website').value) { // Honeypot check
+                    console.log('Bot submission detected.');
+                    return;
+                }
+                
+                const submitBtn = qs('button[type="submit"]', contactForm);
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Sende...';
+
+                // --- Replace this with a real fetch() to your endpoint ---
+                // const endpoint = 'REPLACE_ME_WITH_YOUR_ENDPOINT';
+                // const formData = new FormData(contactForm);
+                // fetch(endpoint, { method: 'POST', body: formData })
+                // .then(response => response.json())
+                // .then(data => { ... })
+                // .catch(error => { ... });
+                // --- End of real fetch block ---
+
+                // --- Simulation starts here ---
+                setTimeout(() => {
+                    const isSuccess = Math.random() > 0.2; // 80% success rate
+                    formMessage.style.display = 'block';
+                    formMessage.textContent = '';
+                    
+                    if (isSuccess) {
+                        formMessage.className = 'form-message success';
+                        formMessage.textContent = 'Vielen Dank! Ihre Anfrage wurde erhalten. Wir werden uns in Kürze bei Ihnen melden.';
+                        contactForm.reset();
+                        contactForm.style.display = 'none';
+                        qs('.modal-header p').style.display = 'none';
+                    } else {
+                        formMessage.className = 'form-message error';
+                        formMessage.textContent = 'Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut oder kontaktieren Sie uns direkt per E-Mail.';
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = 'Anfrage sicher senden';
+                    }
+                }, 1500);
+                // --- Simulation ends here ---
+            });
+
+            // --- Interactive Hero Graph ---
+            const svg = qs('#hero-graph');
+            const container = qs('.hero-graph-container');
+            const numNodes = 40;
+            const nodes = [];
+            const links = [];
+
+            let width, height;
+
+            function setupGraph() {
+                width = container.offsetWidth;
+                height = container.offsetHeight;
+                svg.innerHTML = ''; // Clear previous elements on resize
+                nodes.length = 0;
+                links.length = 0;
+
+                for (let i = 0; i < numNodes; i++) {
+                    nodes.push({
+                        x: Math.random() * width,
+                        y: Math.random() * height,
+                        vx: (Math.random() - 0.5) * 0.2,
+                        vy: (Math.random() - 0.5) * 0.2,
+                        radius: Math.random() * 2 + 1
+                    });
+                }
+
+                for (let i = 0; i < numNodes; i++) {
+                    for (let j = i + 1; j < numNodes; j++) {
+                        if (Math.random() > 0.95) {
+                            links.push({ source: nodes[i], target: nodes[j] });
+                        }
+                    }
+                }
+
+                links.forEach(link => {
+                    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                    line.setAttribute('stroke', 'var(--color-primary)');
+                    line.setAttribute('stroke-width', '0.5');
+                    svg.appendChild(line);
+                    link.element = line;
+                });
+
+                nodes.forEach(node => {
+                    const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                    circle.setAttribute('r', node.radius);
+                    circle.setAttribute('fill', 'var(--color-text)');
+                    svg.appendChild(circle);
+                    node.element = circle;
+                });
+            }
+
+            function animateGraph() {
+                nodes.forEach(node => {
+                    node.x += node.vx;
+                    node.y += node.vy;
+
+                    if (node.x < 0 || node.x > width) node.vx *= -1;
+                    if (node.y < 0 || node.y > height) node.vy *= -1;
+
+                    node.element.setAttribute('cx', node.x);
+                    node.element.setAttribute('cy', node.y);
+                });
+
+                links.forEach(link => {
+                    link.element.setAttribute('x1', link.source.x);
+                    link.element.setAttribute('y1', link.source.y);
+                    link.element.setAttribute('x2', link.target.x);
+                    link.element.setAttribute('y2', link.target.y);
+                });
+
+                requestAnimationFrame(animateGraph);
+            }
+
+            if (window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+                setupGraph();
+                animateGraph();
+                window.addEventListener('resize', setupGraph);
+            }
+            
+            // --- Intersection Observer for animations ---
+            const animatedElements = qsa('.fade-in-up');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            animatedElements.forEach(el => observer.observe(el));
+            
+            // --- Cookie Banner ---
+            const cookieBanner = qs('#cookie-banner');
+            const acceptBtn = qs('#cookie-accept');
+            const declineBtn = qs('#cookie-decline');
+            
+            const consent = localStorage.getItem('cookie_consent');
+            
+            if (consent === null) {
+                cookieBanner.classList.add('is-visible');
+            }
+            
+            const handleConsent = (value) => {
+                localStorage.setItem('cookie_consent', value);
+                cookieBanner.classList.remove('is-visible');
+            };
+            
+            acceptBtn.addEventListener('click', () => handleConsent('accepted'));
+            declineBtn.addEventListener('click', () => handleConsent('declined'));
+
+        });
+    })();
+    </script>
+</body>
+</html>
