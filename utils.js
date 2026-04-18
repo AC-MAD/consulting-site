@@ -597,6 +597,403 @@ const Storage = {
 };
 
 /**
+ * Cache Utilities - Advanced caching mechanisms
+ */
+const Cache = {
+    memory: new Map(),
+    maxSize: 50 * 1024 * 1024, // 50MB
+    currentSize: 0,
+
+    /**
+     * Set cache entry with TTL
+     */
+    set: (key, value, ttl = null) => {
+        const entry = {
+            value,
+            timestamp: Date.now(),
+            ttl,
+            size: JSON.stringify(value).length,
+        };
+
+        // Remove old entry if exists
+        if (Cache.memory.has(key)) {
+            Cache.currentSize -= Cache.memory.get(key).size;
+        }
+
+        Cache.memory.set(key, entry);
+        Cache.currentSize += entry.size;
+
+        // Cleanup old entries if size exceeded
+        if (Cache.currentSize > Cache.maxSize) {
+            Cache._cleanup();
+        }
+    },
+
+    /**
+     * Get cache entry
+     */
+    get: (key) => {
+        const entry = Cache.memory.get(key);
+        if (!entry) return null;
+
+        // Check TTL
+        if (entry.ttl && Date.now() - entry.timestamp > entry.ttl) {
+            Cache.delete(key);
+            return null;
+        }
+
+        return entry.value;
+    },
+
+    /**
+     * Delete cache entry
+     */
+    delete: (key) => {
+        const entry = Cache.memory.get(key);
+        if (entry) {
+            Cache.currentSize -= entry.size;
+            Cache.memory.delete(key);
+        }
+    },
+
+    /**
+     * Clear all cache
+     */
+    clear: () => {
+        Cache.memory.clear();
+        Cache.currentSize = 0;
+    },
+
+    /**
+     * Cleanup oldest entries
+     */
+    _cleanup: () => {
+        const entries = Array.from(Cache.memory.entries());
+        entries.sort((a, b) => a[1].timestamp - b[1].timestamp);
+
+        for (const [key] of entries) {
+            if (Cache.currentSize <= Cache.maxSize * 0.8) break;
+            Cache.delete(key);
+        }
+    },
+};
+
+/**
+ * HTTP Utilities - Network request helpers
+ */
+const HTTP = {
+    /**
+     * Fetch with timeout
+     */
+    fetchWithTimeout: async (url, options = {}) => {
+        const { timeout = 10000, ...fetchOptions } = options;
+
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), timeout);
+
+        try {
+            const response = await fetch(url, {
+                ...fetchOptions,
+                signal: controller.signal,
+            });
+            clearTimeout(timeoutId);
+            return response;
+        } catch (error) {
+            clearTimeout(timeoutId);
+            throw error;
+        }
+    },
+
+    /**
+     * Retry failed requests
+     */
+    retryFetch: async (url, options = {}) => {
+        const { retries = 3, delay = 1000, ...fetchOptions } = options;
+
+        for (let i = 0; i < retries; i++) {
+            try {
+                return await HTTP.fetchWithTimeout(url, fetchOptions);
+            } catch (error) {
+                if (i === retries - 1) throw error;
+                await new Promise(resolve => setTimeout(resolve, delay * (i + 1)));
+            }
+        }
+    },
+
+    /**
+     * Parse JSON response
+     */
+    parseJSON: async (response) => {
+        const contentType = response.headers.get('content-type');
+        if (contentType?.includes('application/json')) {
+            return await response.json();
+        }
+        return null;
+    },
+
+    /**
+     * Create query string
+     */
+    createQueryString: (params) => {
+        return Object.entries(params)
+            .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
+            .join('&');
+    },
+};
+
+/**
+ * Async Utilities - Promise and async helpers
+ */
+const Async = {
+    /**
+     * Wait for milliseconds
+     */
+    wait: (ms) => {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    },
+
+    /**
+     * Retry async function
+     */
+    retry: async (fn, options = {}) => {
+        const { retries = 3, delay = 1000, backoff = true } = options;
+
+        for (let i = 0; i < retries; i++) {
+            try {
+                return await fn();
+            } catch (error) {
+                if (i === retries - 1) throw error;
+                const waitTime = backoff ? delay * Math.pow(2, i) : delay;
+                await Async.wait(waitTime);
+            }
+        }
+    },
+
+    /**
+     * Timeout promise
+     */
+    timeout: (promise, ms) => {
+        return Promise.race([
+            promise,
+            new Promise((_, reject) =>
+                setTimeout(() => reject(new Error('Timeout')), ms)
+            ),
+        ]);
+    },
+
+    /**
+     * Run async functions in sequence
+     */
+    sequence: async (fns) => {
+        const results = [];
+        for (const fn of fns) {
+            results.push(await fn());
+        }
+        return results;
+    },
+
+    /**
+     * Run async functions in parallel with limit
+     */
+    parallelLimit: async (fns, limit = 5) => {
+        const results = [];
+        const executing = [];
+
+        for (const [index, fn] of fns.entries()) {
+            const promise = Promise.resolve().then(() => fn());
+            results[index] = promise;
+
+            if (fns.length >= limit) {
+                executing.push(promise);
+                promise.then(() => {
+                    executing.splice(executing.indexOf(promise), 1);
+                });
+
+                if (executing.length >= limit) {
+                    await Promise.race(executing);
+                }
+            }
+        }
+
+        return Promise.all(results);
+    },
+};
+
+/**
+ * Date & Time Utilities
+ */
+const DateTime = {
+    /**
+     * Format date
+     */
+    format: (date, formatStr = 'YYYY-MM-DD') => {
+        const d = new Date(date);
+        const year = d.getFullYear();
+        const month = String(d.getMonth() + 1).padStart(2, '0');
+        const day = String(d.getDate()).padStart(2, '0');
+        const hours = String(d.getHours()).padStart(2, '0');
+        const minutes = String(d.getMinutes()).padStart(2, '0');
+        const seconds = String(d.getSeconds()).padStart(2, '0');
+
+        return formatStr
+            .replace('YYYY', year)
+            .replace('MM', month)
+            .replace('DD', day)
+            .replace('HH', hours)
+            .replace('mm', minutes)
+            .replace('ss', seconds);
+    },
+
+    /**
+     * Get relative time (e.g., "2 hours ago")
+     */
+    relativeTime: (date) => {
+        const seconds = Math.floor((new Date() - new Date(date)) / 1000);
+        const minutes = Math.floor(seconds / 60);
+        const hours = Math.floor(minutes / 60);
+        const days = Math.floor(hours / 24);
+
+        if (seconds < 60) return 'gerade eben';
+        if (minutes < 60) return `vor ${minutes}m`;
+        if (hours < 24) return `vor ${hours}h`;
+        if (days < 7) return `vor ${days}d`;
+
+        return DateTime.format(date, 'DD.MM.YYYY');
+    },
+
+    /**
+     * Add time to date
+     */
+    add: (date, amount, unit = 'days') => {
+        const d = new Date(date);
+        const units = {
+            seconds: 1000,
+            minutes: 60000,
+            hours: 3600000,
+            days: 86400000,
+            weeks: 604800000,
+            months: 2592000000,
+            years: 31536000000,
+        };
+
+        d.setTime(d.getTime() + amount * (units[unit] || units.days));
+        return d;
+    },
+
+    /**
+     * Difference between dates
+     */
+    difference: (date1, date2, unit = 'days') => {
+        const d1 = new Date(date1);
+        const d2 = new Date(date2);
+        const diff = Math.abs(d1 - d2);
+
+        const units = {
+            seconds: 1000,
+            minutes: 60000,
+            hours: 3600000,
+            days: 86400000,
+            weeks: 604800000,
+            months: 2592000000,
+            years: 31536000000,
+        };
+
+        return Math.floor(diff / (units[unit] || units.days));
+    },
+};
+
+/**
+ * File Utilities
+ */
+const FileUtils = {
+    /**
+     * Format file size
+     */
+    formatSize: (bytes) => {
+        if (bytes === 0) return '0 B';
+        const k = 1024;
+        const sizes = ['B', 'KB', 'MB', 'GB'];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
+    },
+
+    /**
+     * Download file
+     */
+    download: (content, filename, mimeType = 'text/plain') => {
+        const blob = new Blob([content], { type: mimeType });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = filename;
+        link.click();
+        URL.revokeObjectURL(url);
+    },
+
+    /**
+     * Get file extension
+     */
+    getExtension: (filename) => {
+        return filename.slice((filename.lastIndexOf('.') - 1 >>> 0) + 2).toLowerCase();
+    },
+
+    /**
+     * Is valid file type
+     */
+    isValidType: (filename, allowedTypes) => {
+        const ext = FileUtils.getExtension(filename);
+        return allowedTypes.some(type => type.toLowerCase() === ext);
+    },
+};
+
+/**
+ * Math Utilities - Additional math functions
+ */
+const Math_ = {
+    /**
+     * Calculate percentage
+     */
+    percentage: (value, total) => {
+        return (value / total) * 100;
+    },
+
+    /**
+     * Calculate percentage of value
+     */
+    percentageOf: (percentage, value) => {
+        return (percentage / 100) * value;
+    },
+
+    /**
+     * Random integer between min and max
+     */
+    randomInt: (min, max) => {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    },
+
+    /**
+     * Calculate distance between two points
+     */
+    distance: (x1, y1, x2, y2) => {
+        return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+    },
+
+    /**
+     * Calculate angle between two points
+     */
+    angle: (x1, y1, x2, y2) => {
+        return Math.atan2(y2 - y1, x2 - x1) * (180 / Math.PI);
+    },
+
+    /**
+     * Interpolate between values
+     */
+    interpolate: (start, end, t) => {
+        return start + (end - start) * t;
+    },
+};
+
+/**
  * Export utilities
  */
 if (typeof module !== 'undefined' && module.exports) {
@@ -608,6 +1005,12 @@ if (typeof module !== 'undefined' && module.exports) {
         Object,
         Validate,
         Storage,
+        Cache,
+        HTTP,
+        Async,
+        DateTime,
+        FileUtils,
+        Math: Math_,
     };
 }
 
@@ -620,4 +1023,10 @@ window.Utils = {
     Object,
     Validate,
     Storage,
+    Cache,
+    HTTP,
+    Async,
+    DateTime,
+    FileUtils,
+    Math: Math_,
 };

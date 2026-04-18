@@ -915,3 +915,426 @@ if (document.readyState === 'loading') {
 } else {
     announceToAccessibility('Website geladen. Verwenden Sie Tab zum Navigieren.');
 }
+
+// ============================================
+// ADVANCED INTERACTIVE FEATURES
+// ============================================
+
+/**
+ * Page Transition Manager - Smooth transitions between sections
+ */
+const PageTransitionManager = {
+    isTransitioning: false,
+    currentPage: 'home',
+
+    /**
+     * Transition to new page/section
+     */
+    transitionTo: async (targetId, options = {}) => {
+        if (PageTransitionManager.isTransitioning) return;
+
+        PageTransitionManager.isTransitioning = true;
+        const { duration = 300, onComplete = null } = options;
+
+        const currentSection = document.querySelector(`#${PageTransitionManager.currentPage}`);
+        const targetSection = document.querySelector(`#${targetId}`);
+
+        if (!targetSection) {
+            PageTransitionManager.isTransitioning = false;
+            return;
+        }
+
+        // Fade out current
+        if (currentSection) {
+            currentSection.style.transition = `opacity ${duration}ms ease`;
+            currentSection.style.opacity = '0';
+            await new Promise(resolve => setTimeout(resolve, duration));
+        }
+
+        // Update active
+        PageTransitionManager.currentPage = targetId;
+
+        // Fade in new
+        targetSection.style.opacity = '0';
+        targetSection.style.transition = `opacity ${duration}ms ease`;
+        targetSection.style.opacity = '1';
+
+        if (onComplete) onComplete();
+        PageTransitionManager.isTransitioning = false;
+    },
+};
+
+/**
+ * Intersection Observer Manager - Manage multiple observers
+ */
+const IntersectionObserverManager = {
+    observers: new Map(),
+
+    /**
+     * Create managed observer
+     */
+    create: (selector, options = {}) => {
+        const {
+            threshold = 0.1,
+            rootMargin = '0px',
+            callback = null,
+        } = options;
+
+        const elements = document.querySelectorAll(selector);
+        if (elements.size === 0) return null;
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in-view');
+                    if (callback) callback(entry);
+                } else {
+                    entry.target.classList.remove('in-view');
+                }
+            });
+        }, { threshold, rootMargin });
+
+        elements.forEach(el => observer.observe(el));
+        IntersectionObserverManager.observers.set(selector, observer);
+
+        return observer;
+    },
+
+    /**
+     * Cleanup observer
+     */
+    destroy: (selector) => {
+        const observer = IntersectionObserverManager.observers.get(selector);
+        if (observer) {
+            observer.disconnect();
+            IntersectionObserverManager.observers.delete(selector);
+        }
+    },
+
+    /**
+     * Cleanup all
+     */
+    destroyAll: () => {
+        IntersectionObserverManager.observers.forEach(observer => observer.disconnect());
+        IntersectionObserverManager.observers.clear();
+    },
+};
+
+/**
+ * Enhanced Touch Interaction Handler
+ */
+const TouchInteractionHandler = {
+    touchStartX: 0,
+    touchStartY: 0,
+    touchStartTime: 0,
+
+    /**
+     * Initialize touch tracking
+     */
+    init: (element) => {
+        element.addEventListener('touchstart', (e) => {
+            TouchInteractionHandler.touchStartX = e.touches[0].clientX;
+            TouchInteractionHandler.touchStartY = e.touches[0].clientY;
+            TouchInteractionHandler.touchStartTime = Date.now();
+        }, { passive: true });
+
+        element.addEventListener('touchend', (e) => {
+            const touchEndX = e.changedTouches[0].clientX;
+            const touchEndY = e.changedTouches[0].clientY;
+            const touchDuration = Date.now() - TouchInteractionHandler.touchStartTime;
+
+            const diffX = TouchInteractionHandler.touchStartX - touchEndX;
+            const diffY = TouchInteractionHandler.touchStartY - touchEndY;
+            const distance = Math.sqrt(diffX * diffX + diffY * diffY);
+
+            // Determine gesture type
+            if (touchDuration < 300 && distance < 50) {
+                // Tap
+                TouchInteractionHandler.onTap(e);
+            } else if (touchDuration > 500 && distance < 10) {
+                // Long press
+                TouchInteractionHandler.onLongPress(e);
+            } else if (distance > 50) {
+                // Swipe
+                const direction = Math.abs(diffX) > Math.abs(diffY)
+                    ? (diffX > 0 ? 'left' : 'right')
+                    : (diffY > 0 ? 'up' : 'down');
+                TouchInteractionHandler.onSwipe(direction, distance, e);
+            }
+        }, { passive: true });
+    },
+
+    onTap: (e) => {
+        // Override in implementation
+    },
+
+    onLongPress: (e) => {
+        // Override in implementation
+    },
+
+    onSwipe: (direction, distance, e) => {
+        // Override in implementation
+    },
+};
+
+/**
+ * Keyboard Shortcut Manager - Advanced keyboard navigation
+ */
+const KeyboardShortcutManager = {
+    shortcuts: new Map(),
+    isEnabled: true,
+
+    /**
+     * Register keyboard shortcut
+     */
+    register: (keys, callback, options = {}) => {
+        const { ctrl = false, shift = false, alt = false } = options;
+        const shortcutKey = `${ctrl ? 'ctrl+' : ''}${shift ? 'shift+' : ''}${alt ? 'alt+' : ''}${keys}`;
+
+        KeyboardShortcutManager.shortcuts.set(shortcutKey, callback);
+    },
+
+    /**
+     * Initialize keyboard handler
+     */
+    init: () => {
+        document.addEventListener('keydown', (e) => {
+            if (!KeyboardShortcutManager.isEnabled) return;
+
+            const shortcutKey = `${e.ctrlKey ? 'ctrl+' : ''}${e.shiftKey ? 'shift+' : ''}${e.altKey ? 'alt+' : ''}${e.key.toLowerCase()}`;
+            const callback = KeyboardShortcutManager.shortcuts.get(shortcutKey);
+
+            if (callback) {
+                e.preventDefault();
+                callback(e);
+            }
+        });
+    },
+
+    /**
+     * Clear all shortcuts
+     */
+    clear: () => {
+        KeyboardShortcutManager.shortcuts.clear();
+    },
+};
+
+/**
+ * Event Delegation System - Efficient event handling
+ */
+const EventDelegation = {
+    handlers: new Map(),
+
+    /**
+     * Add delegated event listener
+     */
+    on: (selector, eventType, handler) => {
+        const key = `${selector}:${eventType}`;
+
+        if (!EventDelegation.handlers.has(key)) {
+            document.addEventListener(eventType, (e) => {
+                document.querySelectorAll(selector).forEach(el => {
+                    if (e.target === el || el.contains(e.target)) {
+                        handler.call(el, e);
+                    }
+                });
+            });
+
+            EventDelegation.handlers.set(key, handler);
+        }
+    },
+
+    /**
+     * Remove delegated listener
+     */
+    off: (selector, eventType) => {
+        const key = `${selector}:${eventType}`;
+        EventDelegation.handlers.delete(key);
+    },
+};
+
+/**
+ * Loading State Manager - Global loading indicator
+ */
+const LoadingStateManager = {
+    loadingCount: 0,
+    loadingElement: null,
+
+    /**
+     * Initialize loading element
+     */
+    init: () => {
+        LoadingStateManager.loadingElement = document.createElement('div');
+        LoadingStateManager.loadingElement.className = 'global-loading';
+        LoadingStateManager.loadingElement.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            backdrop-filter: blur(4px);
+        `;
+
+        const spinner = document.createElement('div');
+        spinner.style.cssText = `
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f0f0f0;
+            border-top: 4px solid #42a5f5;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        `;
+
+        LoadingStateManager.loadingElement.appendChild(spinner);
+        document.body.appendChild(LoadingStateManager.loadingElement);
+    },
+
+    /**
+     * Show loading state
+     */
+    show: () => {
+        LoadingStateManager.loadingCount++;
+        if (LoadingStateManager.loadingElement) {
+            LoadingStateManager.loadingElement.style.display = 'flex';
+        }
+    },
+
+    /**
+     * Hide loading state
+     */
+    hide: () => {
+        LoadingStateManager.loadingCount = Math.max(0, LoadingStateManager.loadingCount - 1);
+        if (LoadingStateManager.loadingCount === 0 && LoadingStateManager.loadingElement) {
+            LoadingStateManager.loadingElement.style.display = 'none';
+        }
+    },
+};
+
+/**
+ * Theme Manager - Light/dark mode support
+ */
+const ThemeManager = {
+    currentTheme: 'light',
+    storageKey: 'digitalstark-theme',
+
+    /**
+     * Initialize theme
+     */
+    init: () => {
+        const savedTheme = localStorage.getItem(ThemeManager.storageKey);
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        ThemeManager.currentTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+        ThemeManager.apply();
+
+        // Listen for system preference changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (!localStorage.getItem(ThemeManager.storageKey)) {
+                ThemeManager.setTheme(e.matches ? 'dark' : 'light');
+            }
+        });
+    },
+
+    /**
+     * Set theme
+     */
+    setTheme: (theme) => {
+        ThemeManager.currentTheme = theme;
+        localStorage.setItem(ThemeManager.storageKey, theme);
+        ThemeManager.apply();
+    },
+
+    /**
+     * Apply theme
+     */
+    apply: () => {
+        const root = document.documentElement;
+        root.setAttribute('data-theme', ThemeManager.currentTheme);
+    },
+
+    /**
+     * Toggle theme
+     */
+    toggle: () => {
+        const newTheme = ThemeManager.currentTheme === 'light' ? 'dark' : 'light';
+        ThemeManager.setTheme(newTheme);
+    },
+};
+
+/**
+ * Session Analytics - Track user interactions
+ */
+const SessionAnalytics = {
+    events: [],
+    startTime: Date.now(),
+
+    /**
+     * Track event
+     */
+    trackEvent: (eventType, eventData = {}) => {
+        SessionAnalytics.events.push({
+            type: eventType,
+            timestamp: Date.now(),
+            data: eventData,
+        });
+    },
+
+    /**
+     * Get session summary
+     */
+    getSessionSummary: () => {
+        const duration = Date.now() - SessionAnalytics.startTime;
+        return {
+            duration,
+            eventCount: SessionAnalytics.events.length,
+            events: SessionAnalytics.events,
+        };
+    },
+
+    /**
+     * Export session data
+     */
+    exportData: () => {
+        return JSON.stringify(SessionAnalytics.getSessionSummary(), null, 2);
+    },
+};
+
+/**
+ * Initialize advanced features on page load
+ */
+document.addEventListener('DOMContentLoaded', () => {
+    // Initialize theme
+    ThemeManager.init();
+
+    // Initialize loading state manager
+    LoadingStateManager.init();
+
+    // Initialize keyboard shortcuts
+    KeyboardShortcutManager.init();
+
+    // Register keyboard shortcuts
+    KeyboardShortcutManager.register('Escape', () => {
+        const modal = document.querySelector('.modal.active');
+        if (modal) modal.classList.remove('active');
+    });
+
+    KeyboardShortcutManager.register('/', () => {
+        // Focus search or command palette if available
+    });
+
+    // Initialize touch interactions
+    document.addEventListener('touchstart', () => {
+        TouchInteractionHandler.init(document.body);
+    }, { once: true });
+
+    // Track basic analytics
+    SessionAnalytics.trackEvent('pageLoad', {
+        url: window.location.href,
+        timestamp: new Date().toISOString(),
+    });
+});

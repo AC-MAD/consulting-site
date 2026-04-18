@@ -620,6 +620,497 @@ const AccessibilityHelpers = {
     },
 };
 
+/**
+ * Spring Physics - Realistic spring-based animations
+ */
+const SpringPhysics = {
+
+    /**
+     * Spring animation with realistic physics
+     */
+    springAnimate: (element, targetValue, property = 'opacity', options = {}) => {
+        const {
+            stiffness = 0.1,
+            damping = 0.8,
+            mass = 1,
+            velocity = 0,
+            precision = 0.01,
+        } = options;
+
+        const startValue = property === 'opacity'
+            ? parseFloat(window.getComputedStyle(element)[property])
+            : 0;
+
+        let currentValue = startValue;
+        let currentVelocity = velocity;
+
+        function step() {
+            const distance = targetValue - currentValue;
+            const springForce = stiffness * distance;
+            const dampingForce = damping * currentVelocity;
+            const acceleration = (springForce - dampingForce) / mass;
+
+            currentVelocity += acceleration;
+            currentValue += currentVelocity;
+
+            if (property === 'opacity') {
+                element.style.opacity = Math.max(0, Math.min(1, currentValue));
+            } else if (property === 'transform') {
+                element.style.transform = `scale(${currentValue})`;
+            } else {
+                element.style[property] = currentValue;
+            }
+
+            if (Math.abs(currentValue - targetValue) > precision || Math.abs(currentVelocity) > precision) {
+                requestAnimationFrame(step);
+            } else {
+                element.style[property] = property === 'opacity'
+                    ? targetValue
+                    : (property === 'transform' ? `scale(${targetValue})` : targetValue);
+            }
+        }
+
+        requestAnimationFrame(step);
+    },
+
+    /**
+     * Elastic bounce with spring effect
+     */
+    elasticBounce: (element, options = {}) => {
+        const { duration = 1000, bounceCount = 3 } = options;
+
+        let start = null;
+
+        function step(timestamp) {
+            if (start === null) start = timestamp;
+            const progress = Math.min((timestamp - start) / duration, 1);
+
+            // Elastic easing with multiple bounces
+            let ease;
+            if (progress < 0.5) {
+                ease = Math.pow(2, 10 * (progress - 1)) * Math.cos((progress - 1.075) * (2 * Math.PI) / 0.3);
+            } else {
+                ease = Math.pow(2, -10 * (progress - 1)) * Math.cos((progress - 1.075) * (2 * Math.PI) / 0.3) + 1;
+            }
+
+            const scale = 1 + ease * 0.1;
+            element.style.transform = `scale(${scale})`;
+
+            if (progress < 1) {
+                requestAnimationFrame(step);
+            } else {
+                element.style.transform = 'scale(1)';
+            }
+        }
+
+        requestAnimationFrame(step);
+    },
+};
+
+/**
+ * Particle Effects - Advanced particle system for animations
+ */
+const ParticleEffects = {
+
+    /**
+     * Create particle burst effect
+     */
+    particleBurst: (element, options = {}) => {
+        const {
+            particleCount = 20,
+            speed = 5,
+            duration = 1000,
+            color = '#42a5f5',
+        } = options;
+
+        const rect = element.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+
+        for (let i = 0; i < particleCount; i++) {
+            const angle = (Math.PI * 2 * i) / particleCount;
+            const vx = Math.cos(angle) * speed;
+            const vy = Math.sin(angle) * speed;
+
+            ParticleEffects._createParticle(centerX, centerY, vx, vy, duration, color);
+        }
+    },
+
+    /**
+     * Create single particle
+     */
+    _createParticle: (x, y, vx, vy, duration, color) => {
+        const particle = document.createElement('div');
+        particle.style.cssText = `
+            position: fixed;
+            left: ${x}px;
+            top: ${y}px;
+            width: 8px;
+            height: 8px;
+            background: ${color};
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+        `;
+
+        document.body.appendChild(particle);
+
+        let start = null;
+        const gravity = 0.1;
+        let currentVy = vy;
+
+        function step(timestamp) {
+            if (start === null) start = timestamp;
+            const elapsed = timestamp - start;
+            const progress = elapsed / duration;
+
+            currentVy += gravity;
+
+            const newX = x + vx * elapsed / 16;
+            const newY = y + currentVy * elapsed / 16;
+
+            particle.style.left = newX + 'px';
+            particle.style.top = newY + 'px';
+            particle.style.opacity = 1 - progress;
+
+            if (progress < 1) {
+                requestAnimationFrame(step);
+            } else {
+                particle.remove();
+            }
+        }
+
+        requestAnimationFrame(step);
+    },
+
+    /**
+     * Confetti effect
+     */
+    confetti: (options = {}) => {
+        const { duration = 2000, count = 50 } = options;
+        const colors = ['#42a5f5', '#4caf50', '#2e7d32', '#0ea5e9'];
+
+        for (let i = 0; i < count; i++) {
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            const x = Math.random() * window.innerWidth;
+            const y = -10;
+            const vx = (Math.random() - 0.5) * 4;
+            const vy = 2 + Math.random() * 4;
+
+            ParticleEffects._createParticle(x, y, vx, vy, duration, color);
+        }
+    },
+};
+
+/**
+ * Animation Timeline - Orchestrate complex animations
+ */
+const AnimationTimeline = {
+
+    /**
+     * Sequence animations in order
+     */
+    sequence: async (animations) => {
+        for (const animation of animations) {
+            await new Promise(resolve => {
+                animation();
+                setTimeout(resolve, 300);
+            });
+        }
+    },
+
+    /**
+     * Parallel animations
+     */
+    parallel: async (animations) => {
+        return Promise.all(animations.map(anim =>
+            new Promise(resolve => {
+                anim();
+                setTimeout(resolve, 300);
+            })
+        ));
+    },
+
+    /**
+     * Stagger animations with timing control
+     */
+    stagger: (elements, animationFn, delay = 100, options = {}) => {
+        elements.forEach((element, index) => {
+            setTimeout(() => {
+                animationFn(element, index, options);
+            }, index * delay);
+        });
+    },
+
+    /**
+     * Chain animations with callbacks
+     */
+    chain: (animations) => {
+        let currentIndex = 0;
+
+        const playNext = () => {
+            if (currentIndex < animations.length) {
+                const animation = animations[currentIndex];
+                const callback = () => {
+                    currentIndex++;
+                    playNext();
+                };
+                animation(callback);
+            }
+        };
+
+        playNext();
+    },
+};
+
+/**
+ * Advanced Easing Functions - Additional easing curves
+ */
+const EasingFunctions = {
+
+    linear: t => t,
+    easeInQuad: t => t * t,
+    easeOutQuad: t => t * (2 - t),
+    easeInOutQuad: t => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t,
+    easeInCubic: t => t * t * t,
+    easeOutCubic: t => (--t) * t * t + 1,
+    easeInOutCubic: t => t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * (t - 2)) * (2 * (t - 2)) + 1,
+    easeInQuart: t => t * t * t * t,
+    easeOutQuart: t => 1 - (--t) * t * t * t,
+    easeInOutQuart: t => t < 0.5 ? 8 * t * t * t * t : 1 - 8 * (--t) * t * t * t,
+    easeInQuint: t => t * t * t * t * t,
+    easeOutQuint: t => 1 + (--t) * t * t * t * t,
+    easeInOutQuint: t => t < 0.5 ? 16 * t * t * t * t * t : 1 + 16 * (--t) * t * t * t * t,
+    easeInSine: t => 1 - Math.cos((t * Math.PI) / 2),
+    easeOutSine: t => Math.sin((t * Math.PI) / 2),
+    easeInOutSine: t => -(Math.cos(Math.PI * t) - 1) / 2,
+    easeInExpo: t => t === 0 ? 0 : Math.pow(2, 10 * t - 10),
+    easeOutExpo: t => t === 1 ? 1 : 1 - Math.pow(2, -10 * t),
+    easeInOutExpo: t => t === 0 ? 0 : t === 1 ? 1 : t < 0.5 ? Math.pow(2, 20 * t - 10) / 2 : (2 - Math.pow(2, -20 * t + 10)) / 2,
+    easeInCirc: t => 1 - Math.sqrt(1 - Math.pow(t, 2)),
+    easeOutCirc: t => Math.sqrt(1 - Math.pow(t - 1, 2)),
+    easeInOutCirc: t => t < 0.5 ? (1 - Math.sqrt(1 - Math.pow(2 * t, 2))) / 2 : (Math.sqrt(1 - Math.pow(-2 * t + 2, 2)) + 1) / 2,
+    easeInElastic: t => t === 0 ? 0 : t === 1 ? 1 : -Math.pow(2, 10 * t - 10) * Math.sin((t * 10 - 10.75) * 2.0943951023),
+    easeOutElastic: t => t === 0 ? 0 : t === 1 ? 1 : Math.pow(2, -10 * t) * Math.sin((t * 10 - 0.75) * 2.0943951023) + 1,
+    easeInOutElastic: t => t === 0 ? 0 : t === 1 ? 1 : t < 0.5 ? -(Math.pow(2, 20 * t - 10) * Math.sin((20 * t - 11.125) * 1.5707963268)) / 2 : (Math.pow(2, -20 * t + 10) * Math.sin((20 * t - 11.125) * 1.5707963268)) / 2 + 1,
+    easeInBack: t => 2.70158 * t * t * t - 1.70158 * t * t,
+    easeOutBack: t => 1 + 2.70158 * (--t) * t * t + 1.70158 * t * t,
+    easeInOutBack: t => t < 0.5 ? (Math.pow(2 * t, 2) * ((2.5949095 + 1) * 2 * t - 2.5949095)) / 2 : (Math.pow(2 * t - 2, 2) * ((2.5949095 + 1) * (t * 2 - 2) + 2.5949095) + 2) / 2,
+};
+
+/**
+ * Scroll Effects - Advanced scroll-based effects
+ */
+const ScrollEffects = {
+
+    /**
+     * Parallax with depth layers
+     */
+    depthParallax: (element, speed = 0.5, depth = 1) => {
+        const baseSpeed = speed * depth;
+        element.style.willChange = 'transform';
+        element.style.transform = `translateZ(0) translateY(${window.scrollY * baseSpeed}px)`;
+    },
+
+    /**
+     * Blur effect based on scroll velocity
+     */
+    blurOnScroll: (element, options = {}) => {
+        const { maxBlur = 20, sensitivity = 0.1 } = options;
+
+        let lastScrollY = window.scrollY;
+        let scrollVelocity = 0;
+
+        window.addEventListener('scroll', () => {
+            scrollVelocity = Math.abs(window.scrollY - lastScrollY) * sensitivity;
+            const blurAmount = Math.min(scrollVelocity, maxBlur);
+            element.style.filter = `blur(${blurAmount}px)`;
+            lastScrollY = window.scrollY;
+        }, { passive: true });
+    },
+
+    /**
+     * Reveal text on scroll
+     */
+    revealText: (element, options = {}) => {
+        const { trigger = 0.5 } = options;
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const progress = entry.intersectionRatio;
+                    const words = element.textContent.split(' ');
+                    const visibleCount = Math.ceil(words.length * progress);
+
+                    element.style.clip = `rect(0, ${visibleCount * 50}px, 100%, 0)`;
+                }
+            });
+        }, { threshold: [0, 0.5, 1] });
+
+        observer.observe(element);
+    },
+};
+
+/**
+ * Enhanced Gesture Support - Additional touch and mouse events
+ */
+const EnhancedGestures = {
+
+    /**
+     * Detect rotation gesture (two-finger rotate)
+     */
+    onRotate: (element, callback) => {
+        let initialRotation = 0;
+        let lastAngle = 0;
+
+        element.addEventListener('touchmove', (e) => {
+            if (e.touches.length === 2) {
+                const touch1 = e.touches[0];
+                const touch2 = e.touches[1];
+
+                const angle = Math.atan2(
+                    touch2.clientY - touch1.clientY,
+                    touch2.clientX - touch1.clientX
+                ) * 180 / Math.PI;
+
+                if (lastAngle !== 0) {
+                    const rotation = angle - lastAngle;
+                    callback({ angle, rotation });
+                }
+
+                lastAngle = angle;
+            }
+        }, { passive: true });
+
+        element.addEventListener('touchend', () => {
+            lastAngle = 0;
+        });
+    },
+
+    /**
+     * Detect hover intent (prepare for interaction)
+     */
+    onHoverIntent: (element, callback, delay = 200) => {
+        let hoverTimer = null;
+
+        element.addEventListener('mouseenter', () => {
+            hoverTimer = setTimeout(() => {
+                callback({ type: 'intent' });
+            }, delay);
+        });
+
+        element.addEventListener('mouseleave', () => {
+            clearTimeout(hoverTimer);
+        });
+    },
+
+    /**
+     * Detect mouse wheel direction and intensity
+     */
+    onMouseWheel: (element, callback) => {
+        element.addEventListener('wheel', (e) => {
+            callback({
+                direction: e.deltaY > 0 ? 'down' : 'up',
+                intensity: Math.abs(e.deltaY),
+                deltaX: e.deltaX,
+                deltaY: e.deltaY,
+                deltaZ: e.deltaZ,
+            });
+        }, { passive: true });
+    },
+
+    /**
+     * Detect pointer pressure (for devices that support it)
+     */
+    onPointerPressure: (element, callback) => {
+        element.addEventListener('pointermove', (e) => {
+            if (e.pointerType === 'pen' && e.pressure !== undefined) {
+                callback({
+                    pressure: e.pressure,
+                    x: e.clientX,
+                    y: e.clientY,
+                    isPrimary: e.isPrimary,
+                });
+            }
+        }, { passive: true });
+    },
+};
+
+/**
+ * Canvas Animations - Advanced canvas-based effects
+ */
+const CanvasAnimations = {
+
+    /**
+     * Create animated gradient canvas
+     */
+    animatedGradient: (canvasElement, options = {}) => {
+        const {
+            color1 = '#42a5f5',
+            color2 = '#4caf50',
+            duration = 3000,
+        } = options;
+
+        const ctx = canvasElement.getContext('2d');
+        canvasElement.width = window.innerWidth;
+        canvasElement.height = window.innerHeight;
+
+        let start = null;
+
+        function step(timestamp) {
+            if (start === null) start = timestamp;
+            const progress = ((timestamp - start) % duration) / duration;
+
+            const gradient = ctx.createLinearGradient(0, 0, canvasElement.width, canvasElement.height);
+            const offset = progress * canvasElement.width;
+
+            gradient.addColorStop(0, color1);
+            gradient.addColorStop(Math.min(progress, 1), color2);
+            gradient.addColorStop(1, color1);
+
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, canvasElement.width, canvasElement.height);
+
+            requestAnimationFrame(step);
+        }
+
+        requestAnimationFrame(step);
+    },
+};
+
+/**
+ * Motion Path - Animate along SVG paths
+ */
+const MotionPath = {
+
+    /**
+     * Animate element along SVG path
+     */
+    followPath: (element, pathElement, options = {}) => {
+        const { duration = 3000, loop = false } = options;
+
+        const pathLength = pathElement.getTotalLength();
+        let start = null;
+
+        function step(timestamp) {
+            if (start === null) start = timestamp;
+            const elapsed = timestamp - start;
+            const progress = (elapsed % duration) / duration;
+
+            const distance = pathLength * progress;
+            const point = pathElement.getPointAtLength(distance);
+
+            element.style.transform = `translate(${point.x}px, ${point.y}px)`;
+
+            if (loop || progress < 1) {
+                requestAnimationFrame(step);
+            }
+        }
+
+        requestAnimationFrame(step);
+    },
+};
+
 // Initialize if needed
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = {
@@ -627,5 +1118,13 @@ if (typeof module !== 'undefined' && module.exports) {
         GestureDetector,
         PerformanceMonitor,
         AccessibilityHelpers,
+        SpringPhysics,
+        ParticleEffects,
+        AnimationTimeline,
+        EasingFunctions,
+        ScrollEffects,
+        EnhancedGestures,
+        CanvasAnimations,
+        MotionPath,
     };
 }

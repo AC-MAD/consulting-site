@@ -351,6 +351,252 @@ function getColors() {
 }
 
 /**
+ * Feature Flags - Control feature availability
+ */
+const FeatureFlags = {
+    flags: {
+        enableAnimations: true,
+        enableParallax: true,
+        enableSmoothScroll: true,
+        enableTouch: true,
+        enableAccessibility: true,
+        enableAnalytics: true,
+        enableServiceWorker: true,
+        enableDarkMode: true,
+        enablePushNotifications: false,
+        enableOfflineMode: true,
+    },
+
+    /**
+     * Check if feature is enabled
+     */
+    isEnabled: (featureName) => {
+        return FeatureFlags.flags[featureName] ?? false;
+    },
+
+    /**
+     * Enable feature
+     */
+    enable: (featureName) => {
+        FeatureFlags.flags[featureName] = true;
+    },
+
+    /**
+     * Disable feature
+     */
+    disable: (featureName) => {
+        FeatureFlags.flags[featureName] = false;
+    },
+
+    /**
+     * Toggle feature
+     */
+    toggle: (featureName) => {
+        FeatureFlags.flags[featureName] = !FeatureFlags.flags[featureName];
+    },
+
+    /**
+     * Get all flags
+     */
+    getAll: () => {
+        return { ...FeatureFlags.flags };
+    },
+
+    /**
+     * Set multiple flags
+     */
+    setMultiple: (flagsObject) => {
+        Object.assign(FeatureFlags.flags, flagsObject);
+    },
+};
+
+/**
+ * Performance Configuration
+ */
+const PerformanceConfig = {
+    // Network
+    cacheStrategy: 'network-first', // 'network-first' | 'cache-first' | 'stale-while-revalidate'
+    cacheDuration: 3600000, // 1 hour in ms
+    maxCacheSize: 50 * 1024 * 1024, // 50MB
+
+    // Rendering
+    useWillChange: true,
+    useBackfaceVisibility: true,
+    useGpuAcceleration: true,
+    lazyLoadImages: true,
+    lazyLoadThreshold: '50px',
+
+    // Memory
+    maxAnimationFrameRate: 60,
+    throttleScrollEvent: 16, // ~60fps
+    debounceResizeEvent: 200,
+
+    // Compression
+    enableGzip: true,
+    enableBrotli: false,
+    minifyAssets: true,
+
+    // Monitoring
+    enablePerformanceMonitoring: true,
+    performanceThreshold: 3000, // ms
+    enableErrorReporting: true,
+};
+
+/**
+ * API Configuration
+ */
+const APIConfig = {
+    baseURL: process.env.API_BASE_URL || 'https://api.digitalstark-aachen.de',
+    timeout: 10000, // 10 seconds
+    retries: 3,
+    retryDelay: 1000,
+
+    endpoints: {
+        contact: '/api/contact',
+        services: '/api/services',
+        projects: '/api/projects',
+        newsletter: '/api/newsletter',
+        analytics: '/api/analytics',
+    },
+
+    /**
+     * Get endpoint URL
+     */
+    getEndpointURL: (endpointKey) => {
+        const path = APIConfig.endpoints[endpointKey];
+        return path ? `${APIConfig.baseURL}${path}` : null;
+    },
+};
+
+/**
+ * SEO Configuration
+ */
+const SEOConfig = {
+    language: 'de',
+    locale: 'de-DE',
+    charset: 'UTF-8',
+
+    openGraph: {
+        title: 'DigitalStark Aachen',
+        description: 'Digitale Stärke für Aachener Vereine',
+        image: 'https://digitalstark-aachen.de/og-image.jpg',
+        type: 'website',
+        url: 'https://digitalstark-aachen.de',
+    },
+
+    twitter: {
+        card: 'summary_large_image',
+        creator: '@DigitalStarkAachen',
+    },
+
+    structuredData: {
+        '@context': 'https://schema.org',
+        '@type': 'Organization',
+        name: 'DigitalStark Aachen',
+        url: 'https://digitalstark-aachen.de',
+        description: 'Digitale Stärke für Aachener Vereine',
+    },
+};
+
+/**
+ * Mobile Configuration
+ */
+const MobileConfig = {
+    breakpoints: {
+        xs: 320,
+        sm: 480,
+        md: 768,
+        lg: 1024,
+        xl: 1280,
+        xxl: 1536,
+    },
+
+    gestures: {
+        swipeThreshold: 50,
+        swipeVelocity: 0.5,
+        longPressDelay: 500,
+        doubleTapDelay: 300,
+        pinchThreshold: 10,
+    },
+
+    viewport: {
+        width: 'device-width',
+        initialScale: 1.0,
+        maximumScale: 5.0,
+        minimumScale: 1.0,
+        userScalable: true,
+        viewportFit: 'cover',
+    },
+
+    /**
+     * Get current breakpoint
+     */
+    getCurrentBreakpoint: () => {
+        const width = window.innerWidth;
+        if (width < MobileConfig.breakpoints.sm) return 'xs';
+        if (width < MobileConfig.breakpoints.md) return 'sm';
+        if (width < MobileConfig.breakpoints.lg) return 'md';
+        if (width < MobileConfig.breakpoints.xl) return 'lg';
+        if (width < MobileConfig.breakpoints.xxl) return 'xl';
+        return 'xxl';
+    },
+
+    /**
+     * Is mobile device
+     */
+    isMobile: () => {
+        return window.innerWidth < MobileConfig.breakpoints.md;
+    },
+
+    /**
+     * Is tablet device
+     */
+    isTablet: () => {
+        const width = window.innerWidth;
+        return width >= MobileConfig.breakpoints.md && width < MobileConfig.breakpoints.lg;
+    },
+
+    /**
+     * Is desktop device
+     */
+    isDesktop: () => {
+        return window.innerWidth >= MobileConfig.breakpoints.lg;
+    },
+};
+
+/**
+ * Notification Configuration
+ */
+const NotificationConfig = {
+    position: 'bottom-right', // 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right'
+    duration: 3000,
+    animationDuration: 300,
+
+    types: {
+        success: {
+            background: '#4caf50',
+            color: '#fff',
+            icon: '✓',
+        },
+        error: {
+            background: '#f44336',
+            color: '#fff',
+            icon: '✕',
+        },
+        warning: {
+            background: '#ff9800',
+            color: '#fff',
+            icon: '⚠',
+        },
+        info: {
+            background: '#2196f3',
+            color: '#fff',
+            icon: 'ⓘ',
+        },
+    },
+};
+
+/**
  * Export for use in other modules
  */
 if (typeof module !== 'undefined' && module.exports) {
@@ -360,6 +606,12 @@ if (typeof module !== 'undefined' && module.exports) {
         setConfig,
         getAnimationTimings,
         getColors,
+        FeatureFlags,
+        PerformanceConfig,
+        APIConfig,
+        SEOConfig,
+        MobileConfig,
+        NotificationConfig,
     };
 }
 
@@ -367,3 +619,9 @@ if (typeof module !== 'undefined' && module.exports) {
 window.AppConfig = AppConfig;
 window.getConfig = getConfig;
 window.setConfig = setConfig;
+window.FeatureFlags = FeatureFlags;
+window.PerformanceConfig = PerformanceConfig;
+window.APIConfig = APIConfig;
+window.SEOConfig = SEOConfig;
+window.MobileConfig = MobileConfig;
+window.NotificationConfig = NotificationConfig;
