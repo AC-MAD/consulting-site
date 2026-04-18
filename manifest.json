@@ -1,0 +1,103 @@
+{
+  "name": "DigitalStark Aachen - Digitale Stärke für Aachener Vereine",
+  "short_name": "DigitalStark",
+  "description": "Wir stärken Aachener Vereine durch kostenlose Websites, Cybersecurity-Beratung und Penetrationstests",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#42a5f5",
+  "background_color": "#ffffff",
+  "lang": "de-DE",
+  "dir": "ltr",
+
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><defs><linearGradient id='grad' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' style='stop-color:%2342a5f5;stop-opacity:1'/><stop offset='100%' style='stop-color:%234caf50;stop-opacity:1'/></linearGradient></defs><rect width='192' height='192' fill='white'/><circle cx='96' cy='96' r='80' fill='none' stroke='url(%23grad)' stroke-width='8'/><text x='96' y='110' text-anchor='middle' font-size='80' fill='url(%23grad)' font-weight='bold' font-family='serif'>D</text></svg>",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><defs><linearGradient id='grad' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' style='stop-color:%2342a5f5;stop-opacity:1'/><stop offset='100%' style='stop-color:%234caf50;stop-opacity:1'/></linearGradient></defs><rect width='512' height='512' fill='white'/><circle cx='256' cy='256' r='200' fill='none' stroke='url(%23grad)' stroke-width='20'/><text x='256' y='290' text-anchor='middle' font-size='200' fill='url(%23grad)' font-weight='bold' font-family='serif'>D</text></svg>",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ],
+
+  "screenshots": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 540 720'><rect width='540' height='720' fill='%23e3f2fd'/><text x='270' y='100' text-anchor='middle' font-size='40' fill='%23212121' font-weight='bold'>DigitalStark Aachen</text><text x='270' y='150' text-anchor='middle' font-size='20' fill='%23666'>Digitale Stärke für Vereine</text></svg>",
+      "sizes": "540x720",
+      "type": "image/svg+xml",
+      "form_factor": "narrow"
+    }
+  ],
+
+  "categories": ["business", "utilities"],
+  "keywords": ["Aachen", "Website", "Cybersecurity", "Vereine", "NGO"],
+
+  "screenshots_description": "DigitalStark Aachen - Digitale Transformation für lokale Vereine",
+
+  "prefer_related_applications": false,
+
+  "shortcuts": [
+    {
+      "name": "Leistungen anschauen",
+      "short_name": "Leistungen",
+      "description": "Unsere Leistungen im Überblick",
+      "url": "/?view=services",
+      "icons": [
+        {
+          "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect width='192' height='192' fill='%2342a5f5'/><text x='96' y='110' text-anchor='middle' font-size='80' fill='white' font-weight='bold'>📋</text></svg>",
+          "sizes": "192x192",
+          "type": "image/svg+xml"
+        }
+      ]
+    },
+    {
+      "name": "Projekte entdecken",
+      "short_name": "Projekte",
+      "description": "Unsere erfolgreichen Projekte",
+      "url": "/?view=projects",
+      "icons": [
+        {
+          "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect width='192' height='192' fill='%234caf50'/><text x='96' y='110' text-anchor='middle' font-size='80' fill='white' font-weight='bold'>🎯</text></svg>",
+          "sizes": "192x192",
+          "type": "image/svg+xml"
+        }
+      ]
+    },
+    {
+      "name": "Kontakt",
+      "short_name": "Kontakt",
+      "description": "Kontaktieren Sie uns",
+      "url": "/?view=contact",
+      "icons": [
+        {
+          "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect width='192' height='192' fill='%230ea5e9'/><text x='96' y='110' text-anchor='middle' font-size='80' fill='white' font-weight='bold'>✉️</text></svg>",
+          "sizes": "192x192",
+          "type": "image/svg+xml"
+        }
+      ]
+    }
+  ],
+
+  "share_target": {
+    "action": "/share",
+    "method": "POST",
+    "enctype": "multipart/form-data",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url",
+      "files": [
+        {
+          "name": "attachment",
+          "accept": ["image/*"]
+        }
+      ]
+    }
+  }
+}
