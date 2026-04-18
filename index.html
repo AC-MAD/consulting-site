@@ -3,131 +3,151 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="description" content="DigitalStark Aachen - Digitale Stärke für Aachener Vereine. Kostenlose Websites, professionelle Cybersecurity und Penetrationstests.">
-    <meta name="theme-color" content="#000000">
+    <meta name="description" content="DigitalStark Aachen - Digitale Stärke für Aachener Vereine">
+    <meta name="theme-color" content="#42a5f5">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-    <title>DigitalStark Aachen</title>
+    <title>DigitalStark Aachen | Digitale Stärke</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'><rect fill='%23000' width='180' height='180'/><text x='50%' y='50%' font-size='80' fill='%230f7938' text-anchor='middle' dy='.3em' font-weight='bold' font-family='system-ui'>D</text></svg>">
-
     <script src="script.js" defer></script>
 </head>
 <body>
 
-<!-- NAVIGATION HEADER -->
-<header class="navbar" id="navbar">
-    <div class="navbar-content">
-        <a href="#home" class="logo">DigitalStark</a>
-        <nav class="nav-menu" id="navMenu">
-            <a href="#services" class="nav-link">Leistungen</a>
-            <a href="#projects" class="nav-link">Projekte</a>
-            <a href="#impact" class="nav-link">Impact</a>
-        </nav>
+<!-- PRELOAD ANIMATION -->
+<div class="preload-animation" id="preloadAnimation">
+    <div class="preload-content">
+        <div class="preload-logo">
+            <svg viewBox="0 0 60 60" width="80" height="80">
+                <defs>
+                    <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#42a5f5;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#4caf50;stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+                <circle cx="30" cy="30" r="25" fill="none" stroke="url(#logoGrad)" stroke-width="2" class="preload-circle"></circle>
+                <text x="30" y="35" text-anchor="middle" font-size="24" fill="url(#logoGrad)" font-weight="bold" class="preload-text">D</text>
+            </svg>
+        </div>
+        <div class="preload-bar"><div class="preload-progress"></div></div>
     </div>
-    <div class="scroll-progress" id="scrollProgress"></div>
-</header>
+</div>
+
+<!-- NAVIGATION -->
+<nav class="navbar" id="navbar">
+    <div class="nav-container">
+        <div class="logo-wrapper">
+            <a href="#home" class="logo">
+                <span class="logo-icon">⬢</span>
+                <span class="logo-text">DigitalStark</span>
+            </a>
+        </div>
+
+        <div class="nav-menu" id="navMenu">
+            <a href="#services" class="nav-item" data-smooth>Leistungen</a>
+            <a href="#projects" class="nav-item" data-smooth>Projekte</a>
+            <a href="#impact" class="nav-item" data-smooth>Impact</a>
+            <a href="#contact" class="nav-item cta-nav" data-smooth>Kontakt</a>
+        </div>
+
+        <button class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </div>
+    <div class="nav-underline"></div>
+</nav>
 
 <!-- HERO SECTION -->
 <section id="home" class="hero">
-    <div class="hero-content">
-        <h1 class="hero-title">
-            <span class="title-word">Aachener</span>
-            <span class="title-word">Vereine</span>
-            <span class="title-word accent">digital</span>
-            <span class="title-word accent">stärken</span>
-        </h1>
-        <p class="hero-subtitle">Kostenlose Websites, Cybersecurity & Penetrationstests für Ihre Organisation</p>
-        <a href="#services" class="cta-button">
-            <span>Erfahren Sie mehr</span>
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                <path d="M10 4V16M10 16L4 10M10 16L16 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-        </a>
+    <div class="hero-background">
+        <div class="gradient-blob blob-1"></div>
+        <div class="gradient-blob blob-2"></div>
+        <div class="gradient-blob blob-3"></div>
     </div>
-    <div class="hero-background" id="heroBackground"></div>
+
+    <div class="hero-content">
+        <div class="hero-text">
+            <h1 class="hero-title">
+                <span class="word" data-word="Aachener">Aachener</span>
+                <span class="word" data-word="Vereine">Vereine</span>
+                <span class="word accent" data-word="digital">digital</span>
+                <span class="word accent" data-word="stärken">stärken</span>
+            </h1>
+            <p class="hero-subtitle">Kostenlose Websites, Cybersecurity & Penetrationstests für Ihre Organisation</p>
+
+            <div class="hero-cta">
+                <button class="btn btn-primary" id="ctaButton">
+                    <span class="btn-text">Jetzt starten</span>
+                    <span class="btn-arrow">→</span>
+                </button>
+                <button class="btn btn-secondary" id="learnMoreBtn">
+                    Mehr erfahren
+                </button>
+            </div>
+        </div>
+
+        <div class="hero-visual">
+            <div class="floating-card card-1">
+                <div class="card-icon">🌐</div>
+                <div class="card-label">Websites</div>
+            </div>
+            <div class="floating-card card-2">
+                <div class="card-icon">🔐</div>
+                <div class="card-label">Security</div>
+            </div>
+            <div class="floating-card card-3">
+                <div class="card-icon">⚔️</div>
+                <div class="card-label">Pentests</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="scroll-indicator">
+        <div class="scroll-dot"></div>
+        <p>Scroll to explore</p>
+    </div>
 </section>
 
 <!-- SERVICES SECTION -->
 <section id="services" class="services">
-    <h2 class="section-title">Unsere Leistungen</h2>
-
-    <div class="services-carousel" id="servicesCarousel">
-        <!-- Service 1: Website -->
-        <div class="service-card" data-service="0">
-            <div class="service-header">
-                <div class="service-icon">
-                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-                        <rect x="4" y="6" width="32" height="28" rx="2" stroke="currentColor" stroke-width="2"/>
-                        <line x1="4" y1="12" x2="36" y2="12" stroke="currentColor" stroke-width="2"/>
-                        <circle cx="8" cy="9" r="1" fill="currentColor"/>
-                        <circle cx="12" cy="9" r="1" fill="currentColor"/>
-                    </svg>
-                </div>
-                <h3>Website-Erstellung</h3>
-            </div>
-            <p class="service-desc">Professionelle, responsive Websites speziell für Vereine – vollständig kostenlos. Modernes Design, einfach zu verwalten, perfekt für Suchmaschinen optimiert.</p>
-            <ul class="service-features">
-                <li><span class="check">✓</span> Responsive Design</li>
-                <li><span class="check">✓</span> SEO optimiert</li>
-                <li><span class="check">✓</span> Kostenlos gehostet</li>
-                <li><span class="check">✓</span> Einfache Verwaltung</li>
-            </ul>
-            <button class="service-expand" data-service="0">Mehr erfahren →</button>
-        </div>
-
-        <!-- Service 2: Security -->
-        <div class="service-card" data-service="1">
-            <div class="service-header">
-                <div class="service-icon">
-                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-                        <path d="M20 4L6 10V16C6 26.5 20 34 20 34C20 34 34 26.5 34 16V10L20 4Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-                        <path d="M14 20L18 24L26 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </div>
-                <h3>Cybersecurity-Beratung</h3>
-            </div>
-            <p class="service-desc">Umfassende Sicherheitsaudits und Beratung für Ihre Organisation. Wir zeigen Ihnen konkrete Lösungen zum Schutz Ihrer digitalen Infrastruktur.</p>
-            <ul class="service-features">
-                <li><span class="check">✓</span> Sicherheitsaudit</li>
-                <li><span class="check">✓</span> Best Practices</li>
-                <li><span class="check">✓</span> Mitarbeiterschulung</li>
-                <li><span class="check">✓</span> Laufende Unterstützung</li>
-            </ul>
-            <button class="service-expand" data-service="1">Mehr erfahren →</button>
-        </div>
-
-        <!-- Service 3: Penetrationstests -->
-        <div class="service-card" data-service="2">
-            <div class="service-header">
-                <div class="service-icon">
-                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-                        <circle cx="20" cy="20" r="14" stroke="currentColor" stroke-width="2"/>
-                        <circle cx="20" cy="20" r="8" stroke="currentColor" stroke-width="2"/>
-                        <circle cx="20" cy="20" r="2" fill="currentColor"/>
-                        <line x1="20" y1="6" x2="20" y2="2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                        <line x1="34" y1="20" x2="38" y2="20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                    </svg>
-                </div>
-                <h3>Penetrationstests</h3>
-            </div>
-            <p class="service-desc">Professionelle Sicherheitstests, die echte Angriffsszenarien simulieren. Identifizieren Sie Schwachstellen, bevor es Angreifer tun.</p>
-            <ul class="service-features">
-                <li><span class="check">✓</span> Realistische Attacken</li>
-                <li><span class="check">✓</span> Detaillierter Report</li>
-                <li><span class="check">✓</span> Handlungsempfehlungen</li>
-                <li><span class="check">✓</span> Nachtests enthalten</li>
-            </ul>
-            <button class="service-expand" data-service="2">Mehr erfahren →</button>
-        </div>
+    <div class="section-header">
+        <h2>Unsere Leistungen</h2>
+        <p>Drei starke Services für Ihre digitale Transformation</p>
     </div>
 
-    <div class="carousel-indicator">
-        <button class="dot" data-index="0" aria-label="Service 1"></button>
-        <button class="dot" data-index="1" aria-label="Service 2"></button>
-        <button class="dot" data-index="2" aria-label="Service 3"></button>
+    <div class="services-container">
+        <div class="service-item" data-service="0">
+            <div class="service-visual">
+                <div class="service-icon">🌐</div>
+            </div>
+            <h3>Website-Erstellung</h3>
+            <p>Professionelle, responsive Websites speziell für Vereine – vollständig kostenlos, modern und einfach zu verwalten.</p>
+            <button class="service-btn" onclick="expandService(0)">Mehr details →</button>
+        </div>
+
+        <div class="service-item" data-service="1">
+            <div class="service-visual">
+                <div class="service-icon">🔐</div>
+            </div>
+            <h3>Cybersecurity-Beratung</h3>
+            <p>Umfassende Sicherheitsaudits und Beratung. Wir zeigen Ihnen konkrete Lösungen zum Schutz Ihrer digitalen Infrastruktur.</p>
+            <button class="service-btn" onclick="expandService(1)">Mehr details →</button>
+        </div>
+
+        <div class="service-item" data-service="2">
+            <div class="service-visual">
+                <div class="service-icon">⚔️</div>
+            </div>
+            <h3>Penetrationstests</h3>
+            <p>Professionelle Sicherheitstests mit echten Angriffsszenarien. Identifizieren Sie Schwachstellen, bevor Angreifer sie finden.</p>
+            <button class="service-btn" onclick="expandService(2)">Mehr details →</button>
+        </div>
     </div>
 </section>
 
@@ -142,119 +162,148 @@
 
 <!-- PROJECTS SECTION -->
 <section id="projects" class="projects">
-    <h2 class="section-title">Erfolgreiche Projekte</h2>
+    <div class="section-header">
+        <h2>Erfolgreiche Projekte</h2>
+        <p>Realisierte Arbeiten in Aachen und Region</p>
+    </div>
 
-    <div class="projects-showcase" id="projectsShowcase">
-        <!-- Project 1 -->
+    <div class="projects-grid">
         <div class="project-card" data-project="0">
-            <div class="project-header">
-                <div class="project-badge">Penetrationstest</div>
+            <div class="project-image">
+                <div class="image-placeholder">🏫</div>
+            </div>
+            <div class="project-content">
+                <span class="project-tag">Penetrationstest</span>
                 <h3>Kaiser-Karl-Gymnasium Aachen</h3>
+                <p>Umfassender Sicherheitstest der schulischen IT-Infrastruktur mit detailliertem Report.</p>
+                <button class="project-expand" onclick="expandProject(0)">Details anschauen →</button>
             </div>
-            <p class="project-desc">Umfassender Sicherheitstest der schulischen IT-Infrastruktur und Lernplattformen mit detailliertem Sicherheitsbericht.</p>
-            <div class="project-year">2024</div>
         </div>
 
-        <!-- Project 2 -->
         <div class="project-card" data-project="1">
-            <div class="project-header">
-                <div class="project-badge">Website</div>
+            <div class="project-image">
+                <div class="image-placeholder">🌍</div>
+            </div>
+            <div class="project-content">
+                <span class="project-tag">Website</span>
                 <h3>Europäischer Verband Aachen</h3>
+                <p>Mehrsprachige Website mit Veranstaltungskalender und Membership-System.</p>
+                <button class="project-expand" onclick="expandProject(1)">Details anschauen →</button>
             </div>
-            <p class="project-desc">Mehrsprachige Website mit Veranstaltungskalender, Membership-System und modernem Design für lokale europäische Zusammenarbeit.</p>
-            <div class="project-year">2024</div>
         </div>
 
-        <!-- Project 3 -->
         <div class="project-card" data-project="2">
-            <div class="project-header">
-                <div class="project-badge">IT-Sicherheit</div>
-                <h3>Aachener Sportvereine Netzwerk</h3>
+            <div class="project-image">
+                <div class="image-placeholder">⚽</div>
             </div>
-            <p class="project-desc">Koordinierter Sicherheitsaudit für 8 verbundene Sportvereine mit umfassender Schulung für Vorstände.</p>
-            <div class="project-year">2024</div>
+            <div class="project-content">
+                <span class="project-tag">IT-Sicherheit</span>
+                <h3>Aachener Sportvereine Netzwerk</h3>
+                <p>Koordinierter Sicherheitsaudit für 8 verbundene Sportvereine mit Schulung.</p>
+                <button class="project-expand" onclick="expandProject(2)">Details anschauen →</button>
+            </div>
         </div>
     </div>
-
-    <div class="projects-indicator">
-        <button class="dot" data-index="0" aria-label="Project 1"></button>
-        <button class="dot" data-index="1" aria-label="Project 2"></button>
-        <button class="dot" data-index="2" aria-label="Project 3"></button>
-    </div>
-
-    <p class="swipe-hint">← Wischen zum Navigieren →</p>
 </section>
 
 <!-- PROJECT DETAIL MODAL -->
 <div class="modal" id="projectModal">
-    <div class="modal-backdrop" id="projectModalBackdrop"></div>
+    <div class="modal-backdrop" id="projectBackdrop"></div>
     <div class="modal-content modal-large">
-        <button class="modal-close" id="projectModalClose">×</button>
+        <button class="modal-close" id="projectClose">×</button>
         <div id="projectModalBody"></div>
     </div>
 </div>
 
 <!-- IMPACT SECTION -->
 <section id="impact" class="impact">
-    <h2 class="section-title">Unser Impact</h2>
+    <div class="section-header">
+        <h2>Unser Impact</h2>
+        <p>Messbare Erfolge für lokale Gemeinschaften</p>
+    </div>
 
-    <div class="stats-grid">
-        <div class="stat-card" data-stat="0">
-            <div class="stat-number">
+    <div class="stats-container">
+        <div class="stat-box" data-stat="0">
+            <div class="stat-value">
                 <span class="counter" data-target="50">0</span><span class="stat-unit">+</span>
             </div>
             <p class="stat-label">Vereine unterstützt</p>
+            <p class="stat-desc">In Aachen und Umgebung</p>
         </div>
 
-        <div class="stat-card" data-stat="1">
-            <div class="stat-number">
+        <div class="stat-box" data-stat="1">
+            <div class="stat-value">
                 <span class="counter" data-target="100">0</span><span class="stat-unit">%</span>
             </div>
-            <p class="stat-label">Kostenlos für alle</p>
+            <p class="stat-label">Kostenlos</p>
+            <p class="stat-desc">Für alle Vereine</p>
         </div>
 
-        <div class="stat-card" data-stat="2">
-            <div class="stat-number">
+        <div class="stat-box" data-stat="2">
+            <div class="stat-value">
                 <span class="counter" data-target="10000">0</span><span class="stat-unit">+</span>
             </div>
             <p class="stat-label">Mitglieder erreicht</p>
+            <p class="stat-desc">Durch unsere Projekte</p>
         </div>
 
-        <div class="stat-card" data-stat="3">
-            <div class="stat-number">
+        <div class="stat-box" data-stat="3">
+            <div class="stat-value">
                 <span class="counter" data-target="24">0</span><span class="stat-unit">/7</span>
             </div>
-            <p class="stat-label">Support verfügbar</p>
+            <p class="stat-label">Support</p>
+            <p class="stat-desc">Immer für Sie da</p>
         </div>
     </div>
 </section>
 
 <!-- ABOUT SECTION -->
 <section id="about" class="about">
-    <h2 class="section-title">Über DigitalStark</h2>
-
     <div class="about-content">
-        <p>DigitalStark Aachen ist eine gemeinnützige Initiative, die lokale Vereine und Organisationen in ihrer digitalen Transformation unterstützt. Mit kostenlosen Websites und professionellen IT-Sicherheitsservices helfen wir, die Digitalisierung Aachens voranzutreiben.</p>
+        <div class="about-text">
+            <h2>Über DigitalStark Aachen</h2>
+            <p>DigitalStark Aachen ist eine gemeinnützige Initiative, die lokale Vereine und Organisationen in ihrer digitalen Transformation unterstützt. Mit kostenlosen Websites und professionellen IT-Sicherheitsservices helfen wir, die Digitalisierung Aachens voranzutreiben.</p>
 
-        <div class="values-section">
-            <h3>Unsere Werte</h3>
-            <div class="values-list">
-                <div class="value">
-                    <h4>Gemeinschaft</h4>
+            <div class="values-container">
+                <div class="value-box">
+                    <h4>🤝 Gemeinschaft</h4>
                     <p>Wir lieben unsere Stadt und unterstützen ihre Vereine.</p>
                 </div>
-                <div class="value">
-                    <h4>Zugänglich</h4>
+                <div class="value-box">
+                    <h4>🎯 Zugänglich</h4>
                     <p>Alles kostenlos für Aachener Organisationen.</p>
                 </div>
-                <div class="value">
-                    <h4>Sicherheit</h4>
+                <div class="value-box">
+                    <h4>🔒 Sicherheit</h4>
                     <p>Höchste Standards zum Schutz Ihrer Daten.</p>
                 </div>
-                <div class="value">
-                    <h4>Innovation</h4>
+                <div class="value-box">
+                    <h4>⚡ Innovation</h4>
                     <p>Moderne Technologie für alle erreichbar machen.</p>
                 </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CONTACT SECTION -->
+<section id="contact" class="contact">
+    <div class="contact-content">
+        <h2>Lassen Sie uns zusammenarbeiten</h2>
+        <p>Kontaktieren Sie uns für mehr Informationen oder um ein kostenloses Beratungsgespräch zu vereinbaren.</p>
+
+        <div class="contact-methods">
+            <a href="mailto:kontakt@digitalstark-aachen.de" class="contact-card">
+                <span class="contact-icon">✉️</span>
+                <span class="contact-label">kontakt@digitalstark-aachen.de</span>
+            </a>
+            <a href="tel:+49241123456" class="contact-card">
+                <span class="contact-icon">☎️</span>
+                <span class="contact-label">+49 (0) 241 / 123-456</span>
+            </a>
+            <div class="contact-card">
+                <span class="contact-icon">📍</span>
+                <span class="contact-label">Aachen, Deutschland</span>
             </div>
         </div>
     </div>
@@ -264,32 +313,39 @@
 <footer class="footer">
     <div class="footer-content">
         <div class="footer-section">
-            <p class="footer-title">DigitalStark Aachen</p>
-            <p class="footer-subtitle">Digitale Stärke für lokale Vereine</p>
+            <h3>DigitalStark Aachen</h3>
+            <p>Digitale Stärke für lokale Vereine</p>
         </div>
 
         <div class="footer-section">
-            <p class="footer-heading">Kontakt</p>
-            <a href="mailto:kontakt@digitalstark-aachen.de" class="footer-link">kontakt@digitalstark-aachen.de</a>
-            <p class="footer-address">Aachen, Deutschland</p>
+            <h4>Links</h4>
+            <ul>
+                <li><a href="#services">Leistungen</a></li>
+                <li><a href="#projects">Projekte</a></li>
+                <li><a href="#about">Über uns</a></li>
+            </ul>
         </div>
 
         <div class="footer-section">
-            <p class="footer-heading">Folgen Sie uns</p>
+            <h4>Rechtlich</h4>
+            <ul>
+                <li><a href="#">Impressum</a></li>
+                <li><a href="#">Datenschutz</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-section">
+            <h4>Folgen Sie uns</h4>
             <div class="social-links">
-                <a href="#" class="social-link" aria-label="LinkedIn">in</a>
-                <a href="#" class="social-link" aria-label="Facebook">f</a>
-                <a href="#" class="social-link" aria-label="Twitter">𝕏</a>
+                <a href="#" class="social-icon">f</a>
+                <a href="#" class="social-icon">in</a>
+                <a href="#" class="social-icon">𝕏</a>
             </div>
         </div>
     </div>
 
     <div class="footer-bottom">
         <p>&copy; 2025 DigitalStark Aachen. Alle Rechte vorbehalten.</p>
-        <div class="footer-links">
-            <a href="#">Impressum</a>
-            <a href="#">Datenschutz</a>
-        </div>
     </div>
 </footer>
 
