@@ -1,0 +1,748 @@
+/**
+ * DigitalStark Aachen - Visual Readability & Design Enhancements
+ * Fixes transparency issues, improves contrast, removes spinning logo
+ * Applied AFTER main style.css for proper cascading overrides
+ */
+
+/* ============================================
+   CRITICAL FIX: TEXT CONTRAST & READABILITY
+   ============================================ */
+
+/* Hero section - replace transparent background with proper dark overlay */
+.hero {
+    background: linear-gradient(180deg, #ffffff 0%, rgba(227, 242, 253, 0.5) 100%);
+    position: relative;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.08) 100%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+/* Hero text with proper contrast */
+.hero-title {
+    background: linear-gradient(135deg, #1a237e 0%, #004d40 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-weight: 800;
+}
+
+/* Alternative: solid color for better accessibility */
+.hero-title-solid {
+    color: #1a237e;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    font-weight: 800;
+}
+
+.hero-subtitle {
+    color: #424242;
+    text-shadow: 0 1px 3px rgba(255, 255, 255, 0.5);
+    font-size: 18px;
+    line-height: 1.5;
+    margin-top: 16px;
+    font-weight: 500;
+}
+
+/* ============================================
+   SECTION BACKGROUNDS WITH DARK OVERLAYS
+   ============================================ */
+
+/* Services section */
+.services {
+    background: linear-gradient(180deg, #ffffff 0%, #f5f5f5 100%);
+    position: relative;
+}
+
+.services::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(33, 150, 243, 0.08) 0%, rgba(76, 175, 80, 0.08) 100%);
+    pointer-events: none;
+}
+
+.section-header {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    margin-bottom: 48px;
+}
+
+.section-header h2 {
+    color: #1a237e;
+    font-size: 42px;
+    font-weight: 800;
+    margin-bottom: 12px;
+    letter-spacing: -0.5px;
+}
+
+.section-header p {
+    color: #424242;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+/* Service cards with dark overlays */
+.service-item {
+    background: white;
+    border: 1px solid #e8eaf6;
+    border-radius: 12px;
+    padding: 32px 24px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.service-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #42a5f5 0%, #4caf50 100%);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease-out;
+}
+
+.service-item:hover::before {
+    transform: scaleX(1);
+}
+
+.service-item h3 {
+    color: #1a237e;
+    font-size: 20px;
+    font-weight: 700;
+    margin: 16px 0;
+}
+
+.service-item p {
+    color: #424242;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 16px;
+}
+
+/* ============================================
+   PROJECTS SECTION
+   ============================================ */
+
+.projects {
+    background: linear-gradient(180deg, #f5f5f5 0%, #ffffff 100%);
+    position: relative;
+}
+
+.project-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.project-card:hover {
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+    transform: translateY(-4px);
+}
+
+.project-image {
+    background: linear-gradient(135deg, #e3f2fd 0%, #e8f5e9 100%);
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 64px;
+}
+
+.project-content {
+    padding: 24px;
+}
+
+.project-tag {
+    display: inline-block;
+    background: #e3f2fd;
+    color: #1976d2;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    letter-spacing: 0.5px;
+}
+
+.project-card h3 {
+    color: #1a237e;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.project-card p {
+    color: #424242;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 16px;
+}
+
+/* ============================================
+   IMPACT SECTION
+   ============================================ */
+
+.impact {
+    background: linear-gradient(180deg, #ffffff 0%, #f0fdf4 100%);
+}
+
+.stat-box {
+    background: white;
+    border-radius: 12px;
+    padding: 32px 24px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease-out;
+}
+
+.stat-box:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.stat-value {
+    font-size: 48px;
+    font-weight: 800;
+    background: linear-gradient(135deg, #42a5f5 0%, #4caf50 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 12px;
+}
+
+.stat-label {
+    color: #1a237e;
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.stat-desc {
+    color: #616161;
+    font-size: 13px;
+}
+
+/* ============================================
+   ABOUT SECTION
+   ============================================ */
+
+.about {
+    background: linear-gradient(180deg, #e3f2fd 0%, #e8f5e9 100%);
+    position: relative;
+}
+
+.about::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="pattern" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="rgba(66,165,245,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23pattern)"/></svg>');
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+.about-content {
+    position: relative;
+    z-index: 2;
+}
+
+.about-text h2 {
+    color: #1a237e;
+    font-size: 36px;
+    font-weight: 800;
+    margin-bottom: 24px;
+}
+
+.about-text p {
+    color: #424242;
+    font-size: 16px;
+    line-height: 1.8;
+    margin-bottom: 24px;
+}
+
+.values-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+    margin-top: 32px;
+}
+
+.value-box {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    padding: 24px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.value-box h4 {
+    color: #1a237e;
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.value-box p {
+    color: #424242;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* ============================================
+   CONTACT SECTION
+   ============================================ */
+
+.contact {
+    background: linear-gradient(180deg, #f5f5f5 0%, #ffffff 100%);
+}
+
+.contact-content {
+    text-align: center;
+}
+
+.contact-content h2 {
+    color: #1a237e;
+    font-size: 36px;
+    font-weight: 800;
+    margin-bottom: 16px;
+}
+
+.contact-content p {
+    color: #424242;
+    font-size: 16px;
+    margin-bottom: 32px;
+}
+
+.contact-methods {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+}
+
+.contact-card {
+    background: white;
+    padding: 24px;
+    border-radius: 12px;
+    border: 1px solid #e8eaf6;
+    text-decoration: none;
+    transition: all 0.3s ease-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.contact-card:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    border-color: #42a5f5;
+}
+
+.contact-icon {
+    font-size: 32px;
+    margin-bottom: 12px;
+}
+
+.contact-label {
+    color: #1a237e;
+    font-weight: 600;
+    font-size: 15px;
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+
+.footer {
+    background: linear-gradient(180deg, #1a237e 0%, #004d40 100%);
+    color: white;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 32px;
+    margin-bottom: 32px;
+}
+
+.footer-section h3,
+.footer-section h4 {
+    color: white;
+    margin-bottom: 16px;
+    font-weight: 700;
+}
+
+.footer-section p {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.footer-section ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.footer-section li {
+    margin-bottom: 8px;
+}
+
+.footer-section a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    transition: color 0.3s ease-out;
+}
+
+.footer-section a:hover {
+    color: white;
+}
+
+.social-links {
+    display: flex;
+    gap: 12px;
+}
+
+.social-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s ease-out;
+    font-weight: 700;
+}
+
+.social-icon:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    padding-top: 24px;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 13px;
+}
+
+/* ============================================
+   BUTTON IMPROVEMENTS - BETTER CONTRAST
+   ============================================ */
+
+.btn {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    padding: 12px 28px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #42a5f5 0%, #1976d2 100%);
+    color: white;
+    box-shadow: 0 4px 12px rgba(33, 150, 243, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(33, 150, 243, 0.4);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(33, 150, 243, 0.2);
+}
+
+.btn-secondary {
+    background: white;
+    color: #1976d2;
+    border: 2px solid #42a5f5;
+}
+
+.btn-secondary:hover {
+    background: #e3f2fd;
+    transform: translateY(-2px);
+}
+
+.btn-arrow {
+    transition: transform 0.3s ease-out;
+}
+
+.btn:hover .btn-arrow {
+    transform: translateX(4px);
+}
+
+/* ============================================
+   MODAL IMPROVEMENTS
+   ============================================ */
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+}
+
+.modal.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+}
+
+.modal-content {
+    position: relative;
+    z-index: 1001;
+    background: white;
+    border-radius: 16px;
+    padding: 40px;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+    animation: slideUp 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal-content h2 {
+    color: #1a237e;
+    font-size: 28px;
+    font-weight: 800;
+    margin-bottom: 16px;
+}
+
+.modal-content p {
+    color: #424242;
+    line-height: 1.8;
+}
+
+/* ============================================
+   LOGO ANIMATION FIX - REMOVE 360° SPIN
+   ============================================ */
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: #1a237e;
+    font-weight: 800;
+    font-size: 20px;
+    transition: transform 0.3s ease-out;
+}
+
+.logo:hover {
+    transform: scale(1.05);
+}
+
+/* Remove any existing spin animation on logo */
+.logo,
+.logo-icon {
+    animation: none !important;
+}
+
+/* Subtle entrance animation for logo on page load */
+@keyframes logoFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.preload-logo {
+    animation: logoFadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ============================================
+   FLOATING CARDS ENHANCEMENT
+   ============================================ */
+
+.floating-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px 24px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(66, 165, 245, 0.2);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.floating-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 32px rgba(66, 165, 245, 0.2);
+}
+
+.card-icon {
+    font-size: 32px;
+    margin-bottom: 12px;
+}
+
+.card-label {
+    color: #1a237e;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+/* ============================================
+   FORM IMPROVEMENTS
+   ============================================ */
+
+input, textarea, select {
+    background: white;
+    border: 1px solid #e8eaf6;
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-family: inherit;
+    font-size: 14px;
+    color: #212121;
+    transition: all 0.3s ease-out;
+}
+
+input:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: #42a5f5;
+    box-shadow: 0 0 0 3px rgba(66, 165, 245, 0.1);
+}
+
+input::placeholder, textarea::placeholder {
+    color: #9e9e9e;
+}
+
+label {
+    color: #1a237e;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+/* ============================================
+   RESPONSIVE IMPROVEMENTS
+   ============================================ */
+
+@media (max-width: 768px) {
+    .section-header h2 {
+        font-size: 28px;
+    }
+
+    .section-header p {
+        font-size: 15px;
+    }
+
+    .hero-title {
+        font-size: 32px;
+    }
+
+    .hero-subtitle {
+        font-size: 16px;
+    }
+
+    .modal-content {
+        margin: 20px;
+        max-width: calc(100% - 40px);
+    }
+
+    .contact-methods {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ============================================
+   ACCESSIBILITY ENHANCEMENTS
+   ============================================ */
+
+/* Better focus states for keyboard navigation */
+button:focus-visible,
+a:focus-visible {
+    outline: 3px solid #1976d2;
+    outline-offset: 2px;
+}
+
+input:focus-visible, textarea:focus-visible {
+    outline: 3px solid #1976d2;
+    outline-offset: 1px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: more) {
+    .hero-title {
+        color: #000;
+    }
+
+    .hero-subtitle,
+    .section-header p {
+        color: #000;
+    }
+
+    button, .btn {
+        border: 2px solid currentColor;
+    }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
