@@ -1,379 +1,297 @@
 <!DOCTYPE html>
-<html lang="de" data-theme="dark">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DigitalStark Aachen | Digitale Stärke für Aachener Vereine</title>
-    <meta name="description" content="DigitalStark Aachen - Wir stärken lokale Vereine digital. Kostenlose Websites, professionelle Cybersecurity und Penetrationstests.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="DigitalStark Aachen - Digitale Stärke für Aachener Vereine. Kostenlose Websites, professionelle Cybersecurity und Penetrationstests.">
+    <meta name="theme-color" content="#000000">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>DigitalStark Aachen</title>
 
     <link rel="stylesheet" href="style.css">
-    <meta name="theme-color" content="#0f7938">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'><rect fill='%23000' width='180' height='180'/><text x='50%' y='50%' font-size='80' fill='%230f7938' text-anchor='middle' dy='.3em' font-weight='bold' font-family='system-ui'>D</text></svg>">
 
     <script src="script.js" defer></script>
 </head>
 <body>
 
-    <!-- Navigation -->
-    <nav class="navbar" id="navbar">
-        <div class="nav-container">
-            <a href="#" class="nav-brand">
-                <div class="brand-icon">
-                    <i class="fas fa-shield-alt"></i>
+<!-- NAVIGATION HEADER -->
+<header class="navbar" id="navbar">
+    <div class="navbar-content">
+        <a href="#home" class="logo">DigitalStark</a>
+        <nav class="nav-menu" id="navMenu">
+            <a href="#services" class="nav-link">Leistungen</a>
+            <a href="#projects" class="nav-link">Projekte</a>
+            <a href="#impact" class="nav-link">Impact</a>
+        </nav>
+    </div>
+    <div class="scroll-progress" id="scrollProgress"></div>
+</header>
+
+<!-- HERO SECTION -->
+<section id="home" class="hero">
+    <div class="hero-content">
+        <h1 class="hero-title">
+            <span class="title-word">Aachener</span>
+            <span class="title-word">Vereine</span>
+            <span class="title-word accent">digital</span>
+            <span class="title-word accent">stärken</span>
+        </h1>
+        <p class="hero-subtitle">Kostenlose Websites, Cybersecurity & Penetrationstests für Ihre Organisation</p>
+        <a href="#services" class="cta-button">
+            <span>Erfahren Sie mehr</span>
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <path d="M10 4V16M10 16L4 10M10 16L16 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </a>
+    </div>
+    <div class="hero-background" id="heroBackground"></div>
+</section>
+
+<!-- SERVICES SECTION -->
+<section id="services" class="services">
+    <h2 class="section-title">Unsere Leistungen</h2>
+
+    <div class="services-carousel" id="servicesCarousel">
+        <!-- Service 1: Website -->
+        <div class="service-card" data-service="0">
+            <div class="service-header">
+                <div class="service-icon">
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                        <rect x="4" y="6" width="32" height="28" rx="2" stroke="currentColor" stroke-width="2"/>
+                        <line x1="4" y1="12" x2="36" y2="12" stroke="currentColor" stroke-width="2"/>
+                        <circle cx="8" cy="9" r="1" fill="currentColor"/>
+                        <circle cx="12" cy="9" r="1" fill="currentColor"/>
+                    </svg>
                 </div>
-                <span>DigitalStark</span>
-            </a>
-
-            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-
-            <ul class="nav-menu" id="navMenu">
-                <li><a href="#home" class="nav-link">Startseite</a></li>
-                <li><a href="#about" class="nav-link">Über uns</a></li>
-                <li><a href="#services" class="nav-link">Leistungen</a></li>
-                <li><a href="#portfolio" class="nav-link">Projekte</a></li>
-                <li><a href="#contact" class="nav-link cta-link">Kontakt</a></li>
+                <h3>Website-Erstellung</h3>
+            </div>
+            <p class="service-desc">Professionelle, responsive Websites speziell für Vereine – vollständig kostenlos. Modernes Design, einfach zu verwalten, perfekt für Suchmaschinen optimiert.</p>
+            <ul class="service-features">
+                <li><span class="check">✓</span> Responsive Design</li>
+                <li><span class="check">✓</span> SEO optimiert</li>
+                <li><span class="check">✓</span> Kostenlos gehostet</li>
+                <li><span class="check">✓</span> Einfache Verwaltung</li>
             </ul>
+            <button class="service-expand" data-service="0">Mehr erfahren →</button>
         </div>
-    </nav>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <div class="hero-background">
-                <div class="gradient-sphere gradient-1"></div>
-                <div class="gradient-sphere gradient-2"></div>
-            </div>
-            <div class="container">
-                <div class="hero-text">
-                    <h1 class="hero-title">
-                        Aachener Vereine <span class="gradient-text">digital stärken</span>
-                    </h1>
-                    <p class="hero-subtitle">Kostenlose Websites, Cybersecurity-Beratung und professionelle Sicherheitstests für Ihre Organisation</p>
-                    <div class="hero-buttons">
-                        <a href="#contact" class="btn btn-primary">
-                            <i class="fas fa-arrow-right"></i> Jetzt anfragen
-                        </a>
-                        <a href="#services" class="btn btn-secondary">
-                            Mehr erfahren
-                        </a>
-                    </div>
+        <!-- Service 2: Security -->
+        <div class="service-card" data-service="1">
+            <div class="service-header">
+                <div class="service-icon">
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                        <path d="M20 4L6 10V16C6 26.5 20 34 20 34C20 34 34 26.5 34 16V10L20 4Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                        <path d="M14 20L18 24L26 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
                 </div>
-                <div class="hero-image">
-                    <div class="floating-card card-1">
-                        <i class="fas fa-globe"></i>
-                        <p>Web Design</p>
-                    </div>
-                    <div class="floating-card card-2">
-                        <i class="fas fa-lock"></i>
-                        <p>Security</p>
-                    </div>
-                    <div class="floating-card card-3">
-                        <i class="fas fa-shield-virus"></i>
-                        <p>Pentests</p>
-                    </div>
-                </div>
+                <h3>Cybersecurity-Beratung</h3>
             </div>
+            <p class="service-desc">Umfassende Sicherheitsaudits und Beratung für Ihre Organisation. Wir zeigen Ihnen konkrete Lösungen zum Schutz Ihrer digitalen Infrastruktur.</p>
+            <ul class="service-features">
+                <li><span class="check">✓</span> Sicherheitsaudit</li>
+                <li><span class="check">✓</span> Best Practices</li>
+                <li><span class="check">✓</span> Mitarbeiterschulung</li>
+                <li><span class="check">✓</span> Laufende Unterstützung</li>
+            </ul>
+            <button class="service-expand" data-service="1">Mehr erfahren →</button>
         </div>
-    </section>
 
-    <!-- About Section -->
-    <section id="about" class="about">
-        <div class="container">
-            <div class="about-content">
-                <div class="about-text">
-                    <h2 class="section-title">Wer wir sind</h2>
-                    <p class="about-intro">DigitalStark Aachen ist eine gemeinnützige Initiative, die lokale Vereine und Organisationen in ihrer digitalen Transformation unterstützt.</p>
-
-                    <div class="about-stats">
-                        <div class="stat">
-                            <h3>50+</h3>
-                            <p>Vereine unterstützt</p>
-                        </div>
-                        <div class="stat">
-                            <h3>100%</h3>
-                            <p>Kostenlos</p>
-                        </div>
-                        <div class="stat">
-                            <h3>24/7</h3>
-                            <p>Support</p>
-                        </div>
-                    </div>
-
-                    <div class="about-values">
-                        <h3>Unsere Werte</h3>
-                        <div class="values-grid">
-                            <div class="value-item">
-                                <i class="fas fa-heart"></i>
-                                <h4>Gemeinschaft</h4>
-                                <p>Wir lieben unsere Stadt und ihre Vereine</p>
-                            </div>
-                            <div class="value-item">
-                                <i class="fas fa-lock-open"></i>
-                                <h4>Zugänglich</h4>
-                                <p>Kostenlos für alle Aachener Vereine</p>
-                            </div>
-                            <div class="value-item">
-                                <i class="fas fa-shield-alt"></i>
-                                <h4>Sicherheit</h4>
-                                <p>Höchste Standards schützen Ihre Daten</p>
-                            </div>
-                            <div class="value-item">
-                                <i class="fas fa-lightbulb"></i>
-                                <h4>Innovation</h4>
-                                <p>Moderne Technologie für alle</p>
-                            </div>
-                        </div>
-                    </div>
+        <!-- Service 3: Penetrationstests -->
+        <div class="service-card" data-service="2">
+            <div class="service-header">
+                <div class="service-icon">
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                        <circle cx="20" cy="20" r="14" stroke="currentColor" stroke-width="2"/>
+                        <circle cx="20" cy="20" r="8" stroke="currentColor" stroke-width="2"/>
+                        <circle cx="20" cy="20" r="2" fill="currentColor"/>
+                        <line x1="20" y1="6" x2="20" y2="2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        <line x1="34" y1="20" x2="38" y2="20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
                 </div>
+                <h3>Penetrationstests</h3>
             </div>
+            <p class="service-desc">Professionelle Sicherheitstests, die echte Angriffsszenarien simulieren. Identifizieren Sie Schwachstellen, bevor es Angreifer tun.</p>
+            <ul class="service-features">
+                <li><span class="check">✓</span> Realistische Attacken</li>
+                <li><span class="check">✓</span> Detaillierter Report</li>
+                <li><span class="check">✓</span> Handlungsempfehlungen</li>
+                <li><span class="check">✓</span> Nachtests enthalten</li>
+            </ul>
+            <button class="service-expand" data-service="2">Mehr erfahren →</button>
         </div>
-    </section>
+    </div>
 
-    <!-- Services Section -->
-    <section id="services" class="services">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Unsere Leistungen</h2>
-                <p class="section-subtitle">Alles was Ihr Verein braucht, um digital erfolgreich zu sein</p>
+    <div class="carousel-indicator">
+        <button class="dot" data-index="0" aria-label="Service 1"></button>
+        <button class="dot" data-index="1" aria-label="Service 2"></button>
+        <button class="dot" data-index="2" aria-label="Service 3"></button>
+    </div>
+</section>
+
+<!-- SERVICE DETAIL MODAL -->
+<div class="modal" id="serviceModal">
+    <div class="modal-backdrop" id="modalBackdrop"></div>
+    <div class="modal-content">
+        <button class="modal-close" id="modalClose">×</button>
+        <div id="modalBody"></div>
+    </div>
+</div>
+
+<!-- PROJECTS SECTION -->
+<section id="projects" class="projects">
+    <h2 class="section-title">Erfolgreiche Projekte</h2>
+
+    <div class="projects-showcase" id="projectsShowcase">
+        <!-- Project 1 -->
+        <div class="project-card" data-project="0">
+            <div class="project-header">
+                <div class="project-badge">Penetrationstest</div>
+                <h3>Kaiser-Karl-Gymnasium Aachen</h3>
             </div>
-
-            <div class="services-grid">
-                <div class="service-card service-1">
-                    <div class="service-icon">
-                        <i class="fas fa-globe"></i>
-                    </div>
-                    <h3>Website-Erstellung</h3>
-                    <p>Professionelle, responsive Websites speziell für Vereine – vollständig kostenlos. Modernes Design, einfach zu verwalten, suchmaschinen-optimiert.</p>
-                    <ul class="service-features">
-                        <li><i class="fas fa-check"></i> Responsive Design</li>
-                        <li><i class="fas fa-check"></i> SEO optimiert</li>
-                        <li><i class="fas fa-check"></i> Kostenlos gehostet</li>
-                        <li><i class="fas fa-check"></i> Einfache Verwaltung</li>
-                    </ul>
-                </div>
-
-                <div class="service-card service-2">
-                    <div class="service-icon">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <h3>Cybersecurity-Beratung</h3>
-                    <p>Umfassende Sicherheitsaudits und Beratung für Ihre Organisation. Wir zeigen Ihnen konkrete Lösungen zum Schutz Ihrer digitalen Infrastruktur.</p>
-                    <ul class="service-features">
-                        <li><i class="fas fa-check"></i> Sicherheitsaudit</li>
-                        <li><i class="fas fa-check"></i> Best Practices</li>
-                        <li><i class="fas fa-check"></i> Mitarbeiterschulung</li>
-                        <li><i class="fas fa-check"></i> Laufende Unterstützung</li>
-                    </ul>
-                </div>
-
-                <div class="service-card service-3">
-                    <div class="service-icon">
-                        <i class="fas fa-shield-virus"></i>
-                    </div>
-                    <h3>Penetrationstests</h3>
-                    <p>Professionelle Sicherheitstests, die echte Angriffsszenarien simulieren. Identifizieren Sie Schwachstellen, bevor es Angreifer tun.</p>
-                    <ul class="service-features">
-                        <li><i class="fas fa-check"></i> Realistische Attacken</li>
-                        <li><i class="fas fa-check"></i> Detaillierter Report</li>
-                        <li><i class="fas fa-check"></i> Handlungsempfehlungen</li>
-                        <li><i class="fas fa-check"></i> Nachtests enthalten</li>
-                    </ul>
-                </div>
-            </div>
+            <p class="project-desc">Umfassender Sicherheitstest der schulischen IT-Infrastruktur und Lernplattformen mit detailliertem Sicherheitsbericht.</p>
+            <div class="project-year">2024</div>
         </div>
-    </section>
 
-    <!-- Portfolio Section -->
-    <section id="portfolio" class="portfolio">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Erfolgreiche Projekte</h2>
-                <p class="section-subtitle">Von uns realisierte Projekte in Aachen</p>
+        <!-- Project 2 -->
+        <div class="project-card" data-project="1">
+            <div class="project-header">
+                <div class="project-badge">Website</div>
+                <h3>Europäischer Verband Aachen</h3>
             </div>
+            <p class="project-desc">Mehrsprachige Website mit Veranstaltungskalender, Membership-System und modernem Design für lokale europäische Zusammenarbeit.</p>
+            <div class="project-year">2024</div>
+        </div>
 
-            <div class="portfolio-grid">
-                <div class="portfolio-card">
-                    <div class="portfolio-image">
-                        <i class="fas fa-school"></i>
-                    </div>
-                    <div class="portfolio-content">
-                        <span class="portfolio-tag">Penetrationstest</span>
-                        <h3>Kaiser-Karl-Gymnasium Aachen</h3>
-                        <p>Umfassender Sicherheitstest der schulischen IT-Infrastruktur und Lernplattformen mit detailliertem Sicherheitsbericht und Empfehlungen.</p>
-                        <div class="portfolio-meta">
-                            <span><i class="fas fa-calendar"></i> 2024</span>
-                            <span><i class="fas fa-tag"></i> Schule</span>
-                        </div>
-                    </div>
+        <!-- Project 3 -->
+        <div class="project-card" data-project="2">
+            <div class="project-header">
+                <div class="project-badge">IT-Sicherheit</div>
+                <h3>Aachener Sportvereine Netzwerk</h3>
+            </div>
+            <p class="project-desc">Koordinierter Sicherheitsaudit für 8 verbundene Sportvereine mit umfassender Schulung für Vorstände.</p>
+            <div class="project-year">2024</div>
+        </div>
+    </div>
+
+    <div class="projects-indicator">
+        <button class="dot" data-index="0" aria-label="Project 1"></button>
+        <button class="dot" data-index="1" aria-label="Project 2"></button>
+        <button class="dot" data-index="2" aria-label="Project 3"></button>
+    </div>
+
+    <p class="swipe-hint">← Wischen zum Navigieren →</p>
+</section>
+
+<!-- PROJECT DETAIL MODAL -->
+<div class="modal" id="projectModal">
+    <div class="modal-backdrop" id="projectModalBackdrop"></div>
+    <div class="modal-content modal-large">
+        <button class="modal-close" id="projectModalClose">×</button>
+        <div id="projectModalBody"></div>
+    </div>
+</div>
+
+<!-- IMPACT SECTION -->
+<section id="impact" class="impact">
+    <h2 class="section-title">Unser Impact</h2>
+
+    <div class="stats-grid">
+        <div class="stat-card" data-stat="0">
+            <div class="stat-number">
+                <span class="counter" data-target="50">0</span><span class="stat-unit">+</span>
+            </div>
+            <p class="stat-label">Vereine unterstützt</p>
+        </div>
+
+        <div class="stat-card" data-stat="1">
+            <div class="stat-number">
+                <span class="counter" data-target="100">0</span><span class="stat-unit">%</span>
+            </div>
+            <p class="stat-label">Kostenlos für alle</p>
+        </div>
+
+        <div class="stat-card" data-stat="2">
+            <div class="stat-number">
+                <span class="counter" data-target="10000">0</span><span class="stat-unit">+</span>
+            </div>
+            <p class="stat-label">Mitglieder erreicht</p>
+        </div>
+
+        <div class="stat-card" data-stat="3">
+            <div class="stat-number">
+                <span class="counter" data-target="24">0</span><span class="stat-unit">/7</span>
+            </div>
+            <p class="stat-label">Support verfügbar</p>
+        </div>
+    </div>
+</section>
+
+<!-- ABOUT SECTION -->
+<section id="about" class="about">
+    <h2 class="section-title">Über DigitalStark</h2>
+
+    <div class="about-content">
+        <p>DigitalStark Aachen ist eine gemeinnützige Initiative, die lokale Vereine und Organisationen in ihrer digitalen Transformation unterstützt. Mit kostenlosen Websites und professionellen IT-Sicherheitsservices helfen wir, die Digitalisierung Aachens voranzutreiben.</p>
+
+        <div class="values-section">
+            <h3>Unsere Werte</h3>
+            <div class="values-list">
+                <div class="value">
+                    <h4>Gemeinschaft</h4>
+                    <p>Wir lieben unsere Stadt und unterstützen ihre Vereine.</p>
                 </div>
-
-                <div class="portfolio-card">
-                    <div class="portfolio-image">
-                        <i class="fas fa-globe-europe"></i>
-                    </div>
-                    <div class="portfolio-content">
-                        <span class="portfolio-tag">Website</span>
-                        <h3>Europäischer Verband Aachen</h3>
-                        <p>Mehrsprachige Website mit Veranstaltungskalender, Membership-System und modernem Design. Vollständig optimiert für mobile Geräte.</p>
-                        <div class="portfolio-meta">
-                            <span><i class="fas fa-calendar"></i> 2024</span>
-                            <span><i class="fas fa-tag"></i> Organisation</span>
-                        </div>
-                    </div>
+                <div class="value">
+                    <h4>Zugänglich</h4>
+                    <p>Alles kostenlos für Aachener Organisationen.</p>
                 </div>
-
-                <div class="portfolio-card">
-                    <div class="portfolio-image">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <div class="portfolio-content">
-                        <span class="portfolio-tag">IT-Sicherheit</span>
-                        <h3>Aachener Sportvereine Netzwerk</h3>
-                        <p>Koordinierter Sicherheitsaudit für 8 verbundene Sportvereine. Schulungsprogramm für Vorstände und kontinuierliche Sicherheitsbetreuung.</p>
-                        <div class="portfolio-meta">
-                            <span><i class="fas fa-calendar"></i> 2024</span>
-                            <span><i class="fas fa-tag"></i> Sport</span>
-                        </div>
-                    </div>
+                <div class="value">
+                    <h4>Sicherheit</h4>
+                    <p>Höchste Standards zum Schutz Ihrer Daten.</p>
+                </div>
+                <div class="value">
+                    <h4>Innovation</h4>
+                    <p>Moderne Technologie für alle erreichbar machen.</p>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- CTA Section -->
-    <section class="cta-section">
-        <div class="container">
-            <div class="cta-content">
-                <h2>Bereit, digital stärker zu werden?</h2>
-                <p>Lassen Sie uns zusammen Ihren Verein in die digitale Zukunft bringen – kostenlos und professionell.</p>
-                <a href="#contact" class="btn btn-primary btn-large">
-                    <i class="fas fa-envelope"></i> Kontakt aufnehmen
-                </a>
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-section">
+            <p class="footer-title">DigitalStark Aachen</p>
+            <p class="footer-subtitle">Digitale Stärke für lokale Vereine</p>
+        </div>
+
+        <div class="footer-section">
+            <p class="footer-heading">Kontakt</p>
+            <a href="mailto:kontakt@digitalstark-aachen.de" class="footer-link">kontakt@digitalstark-aachen.de</a>
+            <p class="footer-address">Aachen, Deutschland</p>
+        </div>
+
+        <div class="footer-section">
+            <p class="footer-heading">Folgen Sie uns</p>
+            <div class="social-links">
+                <a href="#" class="social-link" aria-label="LinkedIn">in</a>
+                <a href="#" class="social-link" aria-label="Facebook">f</a>
+                <a href="#" class="social-link" aria-label="Twitter">𝕏</a>
             </div>
         </div>
-    </section>
+    </div>
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Kontakt aufnehmen</h2>
-                <p class="section-subtitle">Wir freuen uns auf Ihre Nachricht</p>
-            </div>
-
-            <div class="contact-wrapper">
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-envelope"></i>
-                        </div>
-                        <div class="contact-details">
-                            <h4>E-Mail</h4>
-                            <p>kontakt@digitalstark-aachen.de</p>
-                        </div>
-                    </div>
-
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-map-marker-alt"></i>
-                        </div>
-                        <div class="contact-details">
-                            <h4>Standort</h4>
-                            <p>Aachen, Deutschland</p>
-                        </div>
-                    </div>
-
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-phone"></i>
-                        </div>
-                        <div class="contact-details">
-                            <h4>Telefon</h4>
-                            <p>+49 (0) 241 / 123-456</p>
-                        </div>
-                    </div>
-                </div>
-
-                <form class="contact-form" id="contactForm">
-                    <div class="form-group">
-                        <input type="text" placeholder="Ihr Name" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="email" placeholder="Ihre E-Mail" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" placeholder="Vereinsname">
-                    </div>
-                    <div class="form-group">
-                        <textarea placeholder="Ihre Nachricht" rows="5" required></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-full">
-                        <i class="fas fa-paper-plane"></i> Nachricht senden
-                    </button>
-                </form>
-            </div>
+    <div class="footer-bottom">
+        <p>&copy; 2025 DigitalStark Aachen. Alle Rechte vorbehalten.</p>
+        <div class="footer-links">
+            <a href="#">Impressum</a>
+            <a href="#">Datenschutz</a>
         </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>DigitalStark Aachen</h3>
-                    <p>Digitale Stärke für Aachener Vereine – kostenlos, professionell, nachhaltig.</p>
-                    <div class="social-links">
-                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
-                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                    </div>
-                </div>
-
-                <div class="footer-section">
-                    <h4>Navigation</h4>
-                    <ul>
-                        <li><a href="#home">Startseite</a></li>
-                        <li><a href="#about">Über uns</a></li>
-                        <li><a href="#services">Leistungen</a></li>
-                        <li><a href="#portfolio">Projekte</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-section">
-                    <h4>Rechtlich</h4>
-                    <ul>
-                        <li><a href="#">Impressum</a></li>
-                        <li><a href="#">Datenschutz</a></li>
-                        <li><a href="#">Nutzungsbedingungen</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-section">
-                    <h4>Services</h4>
-                    <ul>
-                        <li><a href="#services">Website-Erstellung</a></li>
-                        <li><a href="#services">Cybersecurity</a></li>
-                        <li><a href="#services">Penetrationstests</a></li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="footer-bottom">
-                <p>&copy; 2025 DigitalStark Aachen gGmbH. Alle Rechte vorbehalten.</p>
-            </div>
-        </div>
-    </footer>
+    </div>
+</footer>
 
 </body>
 </html>
